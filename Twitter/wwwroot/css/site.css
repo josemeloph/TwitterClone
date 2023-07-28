@@ -251,7 +251,7 @@ left-navbar {
 }
 
 .trends-header div,
-.trends-item>div>div {
+.trends-item > div > div {
     display: flex;
     margin-right: -10px;
     border-radius: 100%;
@@ -275,7 +275,7 @@ left-navbar {
     display: flex;
     width: 100%;
 }
- 
+
 .content-header .forFollow {
     position: relative;
     width: 50%;
@@ -310,9 +310,9 @@ left-navbar {
     transition: 0.2s;
 }
 
-.content-header .forFollowing:hover {
-    background: #34425070;
-}
+    .content-header .forFollowing:hover {
+        background: #34425070;
+    }
 
 .content-header svg {
     margin-left: 25px;
@@ -322,26 +322,26 @@ left-navbar {
     margin-right: 0;
 }
 
-.trends-item>div {
+.trends-item > div {
     position: relative;
 }
 
-.trends-item>div>div {
-    position: absolute;
-    width: 34.75px;
-    height: 34.75px;
-    top: -7px;
-    right: 0;
-}
+    .trends-item > div > div {
+        position: absolute;
+        width: 34.75px;
+        height: 34.75px;
+        top: -7px;
+        right: 0;
+    }
 
-.trends-header div:hover,
-.trends-item>div>div:hover {
-    background-color: var(--shadow-color);
-}
+        .trends-header div:hover,
+        .trends-item > div > div:hover {
+            background-color: var(--shadow-color);
+        }
 
-.trends-item>div>div:hover svg {
-    fill: var(--main-color);
-}
+            .trends-item > div > div:hover svg {
+                fill: var(--main-color);
+            }
 
 
 .content-header svg,
@@ -364,7 +364,7 @@ left-navbar {
 
 .post:hover {
     cursor: pointer;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(240,240,240,0.08);
 }
 
 .left-column .profile-img {
@@ -378,44 +378,174 @@ left-navbar {
     width: 100%;
 }
 
-.right-column input {
-    height: 56px;
-    background: transparent;
-    border: none;
-}
-
-    .right-column input::placeholder,
-    .search::placeholder {
-        font-size: 20px;
-        color: #8899A6;
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    .right-column input {
+        height: 56px;
+        background: transparent;
+        border: none;
     }
 
+        .right-column input::placeholder,
+        .search::placeholder {
+            font-size: 20px;
+            color: #8899A6;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
 .tweet .right-column .bottom-row {
-    width:100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 12px;
 }
 
-.tweet .right-column .bottom-row .buttons {
+    .tweet .right-column .bottom-row .buttons {
+        display: flex;
+    }
+
+        .tweet .right-column .bottom-row .buttons div {
+            margin-right: 13px;
+        }
+
+
+
+
+    .tweet .right-column .bottom-row .tweet-btn {
+        height: 34px;
+        width: 90px;
+        opacity: 0.5;
+        margin: 0;
+    }
+
+.post {
+    padding: 15px;
     display: flex;
+    border-bottom: 1px solid var(--border-color);
+    transition: 0.3s ease;
 }
-    .tweet .right-column .bottom-row .buttons div {
-        margin-right: 13px;
+
+.tweet .right-column .bottom-row svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--main-color);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .post-header div {
+        display: flex;
+        align-items: center;
     }
 
+.dot {
+    line-height: 20px;
+    font-size: 15px;
+    margin-top: -6px;
+}
 
-    .tweet .right-column .bottom-row svg {
-        width: 22px;
-        height: 22px;
-        fill: var(--main-color);
+.details {
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 100%;
+    justify-content: center !important;
+}
+
+    .details svg {
+        margin: 0;
     }
 
-.tweet .right-column .bottom-row .tweet-btn {
-    height: 34px;
-    width: 90px;
-    opacity: 0.5;
-    margin: 0;
+    .details:hover {
+        background-color: rgba(29,161,242, 0.2);
+        fill: rgb(29,161,242);
+    }
+
+.post-header .tag,
+.post-header .time,
+.dot {
+    margin-left: 4px;
+}
+
+.post .bottom-row {
+    max-width: 425px;
+    margin-top: 12px;
+    justify-content: space-between;
+}
+
+    .post .bottom-row,
+    .post .bottom-row > div {
+        display: flex;
+        align-items: center;
+        color: rgb(136,153,166);
+        cursor: pointer;
+    }
+
+        .post .bottom-row > div {
+            margin: -8px;
+        }
+
+            .post .bottom-row > div > div {
+                border-radius: 9999px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: 0.2s ease;
+            }
+
+            .post .bottom-row > div > span {
+                transition: 0.2s ease;
+            }
+
+            .post .bottom-row > div:hover > div {
+                background-color: rgba(29,161,242,0.2);
+                
+            }
+
+            .bottom-row > div:hover > div svg,
+            .post .bottom-row > div:hover > span {
+                color: var(--main-color);
+                fill: currentColor;
+            }
+
+            .post .bottom-row > div:nth-child(2):hover > div {
+                background-color: rgba(23,191, 99,0.2);
+            }
+
+            .post .bottom-row > div:nth-child(2):hover > span,
+            .bottom-row > div:nth-child(2):hover > div svg {
+                color: rgb(23,191,99);
+                fill: currentColor;
+            }
+
+.post .bottom-row > div:nth-child(3):hover > div {
+    background-color: rgba(224,36,94, 0.2);
+}
+
+.post .bottom-row > div:nth-child(3):hover > span,
+.bottom-row > div:nth-child(3):hover > div svg {
+    color: rgb(224,36,94);
+    fill: currentColor;
+}
+
+.post .bottom-row span {
+    font-size: 13px;
+}
+
+.post .bottom-row span,
+.post .bottom-row svg {
+    fill: rgb(136,153,166);
+    font-family: inherit;
+}
+
+.post .bottom-row svg {
+    margin: 8px;
+    width: 1.25em;
+    height: 1.25em;
+}
+
+.post .bottom-row span {
+    padding: 0 12px;
+    line-height: 20px;
 }

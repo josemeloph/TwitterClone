@@ -1,71 +1,421 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿@font-face {
+    font-family: TwitterChirp;
+    src: url(https://abs.twing.com/fonts/chirp-bold-web.woff2) format('woff2');
+    src: url(https://abs.twing.com/fonts/chirp-bold-web.woff) format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+@font-face {
+    font-family: TwitterChirp;
+    src: url(https://abs.twing.com/fonts/chirp-heavy-web.woff2) format('woff2');
+    src: url(https://abs.twing.com/fonts/chirp-heavy-web.woff) format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+:root {
+    --main-color: rgb(29,161,242);
+    --border-color: rgb(56,68,77);
+    --shadow-color: rgba(255,255,255,0.07);
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
 html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+    color: #fff;
+    font-size: 15px;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    background-color: #15202B;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+button {
+    cursor: pointer;
+}
+
+input:focus {
+    outline: none;
+}
+
+img {
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 243px auto 350px;
+    margin: 0 4%;
+    max-width: 1200px;
+}
+
+.left-side {
+    position: fixed;
+    height: 100vh;
+    width: 240px;
+    padding: 0 12px 0 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+left-navbar {
+    width: 245px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.left-side .left-navbar .logo {
+    margin-top: 18px;
+    margin-bottom: 4px;
+    margin-left: 9px;
+    height: 2rem;
+}
+
+    .left-side .left-navbar .logo img {
+        width: 2rem;
+    }
+
+.left-side svg,
+.content-header svg,
+.post-header svg,
+.trends svg {
+    fill: #fff;
+    height: 1.75rem;
+}
+
+
+
+.left-navbar a {
+    display: flex;
+    padding: 4px 0;
+}
+
+    .left-navbar a div {
+        display: flex;
+        padding: 12px;
+        align-items: center;
+        border-radius: 99999px;
+        transition: 0.2s;
+    }
+
+        .left-navbar a div:hover {
+            background-color: var(--shadow-color);
+        }
+
+    .left-navbar a span {
+        font-size: 20px;
+        letter-spacing: 0.3px;
+        margin-left: 20px;
+        margin-right: 16px;
+    }
+
+.tweet-btn {
+    font-family: var(--main-font);
+    font-size: 16px;
+    width: 96%;
+    height: 50px;
+    font-weight: 700;
+    border: none;
+    letter-spacing: 0.3px;
+    background-color: var(--main-color);
+    border-radius: 30px;
+    color: inherit;
+    margin: 16px 0;
+}
+
+    .tweet-btn svg {
+        display: none;
+    }
+
+
+.left-side .right-column {
+    display: flex;
+    align-items: center;
+}
+
+    .left-side .right-column svg {
+        margin-left: 60px;
+    }
+
+.profile-btn {
+    display: flex;
+    margin: 12px 0;
+    padding: 12px;
+    cursor: pointer;
+    width: calc(100% + 12px);
+    border-radius: 9999px;
+    transition: 0.2s;
+}
+
+    .profile-btn:hover {
+        background-color: var(--shadow-color);
+    }
+
+    .profile-btn img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .profile-btn svg,
+    .details svg,
+    .search-bar svg {
+        height: 1.25rem;
+        margin-left: 5px;
+        vertical-align: bottom;
+    }
+
+@media(max-width: 1300px) {
+    .container {
+        grid-template-columns: 67px auto 350px;
+    }
+
+    .left-side {
+        width: 70px;
+    }
+
+    .left-navbar a span {
+        display: none;
+    }
+
+    .tweet-btn {
+        width: 50px;
+    }
+
+        .tweet-btn span {
+            display: none;
+        }
+
+        .tweet-btn svg {
+            margin-left: 24%;
+            display: block;
+        }
+
+    .left-side .right-column {
+        display: none;
+    }
+
+    .profile-btn {
+        width: 100%;
+        padding: 10px 11px 6px 10px;
+        margin: 12px 0 12px -2px;
+    }
+}
+
+.tag,
+.time,
+.dot,
+.details svg {
+    color: rgb(136,153,166);
+    fill: rgb(136,153,166);
+    display: block;
+}
+
+.right-column {
+    margin-left: 15px;
+}
+
+.profile-img {
+    border-radius: 100%;
+    width: 48px;
+    height: 48px;
+}
+
+.content {
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-bottom: none;
+}
+
+.trends-header div,
+.trends-item>div>div {
+    display: flex;
+    margin-right: -10px;
+    border-radius: 100%;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+}
+
+.content-header span {
+    display: block;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+}
+
+.content-header div {
+    display: flex;
+    width: 100%;
+}
+ 
+.content-header .forFollow {
+    position: relative;
+    width: 50%;
+    padding: 17px 95px;
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.content-header .fade {
+    color: #ffffff62 !important;
+    font-weight: 500;
+}
+
+.content-header .forFollow:hover {
+    background: #34425070;
+}
+
+.content-header .forFollowing {
+    width: 50%;
+    padding: 17px 95px;
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.content-header .forFollowing:hover {
+    background: #34425070;
+}
+
+.content-header svg {
+    margin-left: 25px;
+}
+
+.trends-header svg {
+    margin-right: 0;
+}
+
+.trends-item>div {
+    position: relative;
+}
+
+.trends-item>div>div {
+    position: absolute;
+    width: 34.75px;
+    height: 34.75px;
+    top: -7px;
+    right: 0;
+}
+
+.trends-header div:hover,
+.trends-item>div>div:hover {
+    background-color: var(--shadow-color);
+}
+
+.trends-item>div>div:hover svg {
+    fill: var(--main-color);
+}
+
+
+.content-header svg,
+.trends-header svg {
+    fill: var(--main-color);
+    width: 22px;
+    height: 22px;
+}
+
+.content-header {
+    padding: 15px 0 0 0;
+}
+
+.tweet {
+    padding: 10px 13px 10px 13px;
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.post:hover {
+    cursor: pointer;
+    background-color: rgba(255,255,255,0.7);
+}
+
+.left-column .profile-img {
+    width: 40px;
+    height: 40px;
+}
+
+.right-column,
+.right-column form,
+.right-column input {
+    width: 100%;
+}
+
+.right-column input {
+    height: 56px;
+    background: transparent;
+    border: none;
+}
+
+    .right-column input::placeholder,
+    .search::placeholder {
+        font-size: 20px;
+        color: #8899A6;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+.tweet .right-column .bottom-row {
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.tweet .right-column .bottom-row .buttons {
+    display: flex;
+}
+    .tweet .right-column .bottom-row .buttons div {
+        margin-right: 13px;
+    }
+
+
+    .tweet .right-column .bottom-row svg {
+        width: 22px;
+        height: 22px;
+        fill: var(--main-color);
+    }
+
+.tweet .right-column .bottom-row .tweet-btn {
+    height: 34px;
+    width: 90px;
+    opacity: 0.5;
+    margin: 0;
 }

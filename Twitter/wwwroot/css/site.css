@@ -368,7 +368,9 @@ left-navbar {
 }
 
 .left-column .profile-img {
+    margin: 5px;
     width: 40px;
+    word-break: break-word;
     height: 40px;
 }
 
@@ -379,6 +381,11 @@ left-navbar {
 }
 
     .right-column input {
+        line-height: 20px;
+        font-family: inherit;
+        font-weight: 400;
+        font-size: 20px;
+        color: rgb(255,255,255);
         height: 56px;
         background: transparent;
         border: none;
@@ -403,9 +410,6 @@ left-navbar {
         display: flex;
     }
 
-        .tweet .right-column .bottom-row .buttons div {
-            margin-right: 13px;
-        }
 
 
 
@@ -461,6 +465,23 @@ left-navbar {
         background-color: rgba(29,161,242, 0.2);
         fill: rgb(29,161,242);
     }
+
+.tweet .bottom-row .buttons div {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
+    margin-right: 7px;
+    cursor: pointer;
+}
+
+.tweet .bottom-row .buttons div:hover {
+
+    background-color: rgba(29,161,242,0.2);
+}
 
 .post-header .tag,
 .post-header .time,

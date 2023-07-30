@@ -161,6 +161,8 @@ left-navbar {
         margin-left: 60px;
     }
 
+
+
 .profile-btn {
     display: flex;
     margin: 12px 0;
@@ -170,6 +172,7 @@ left-navbar {
     border-radius: 9999px;
     transition: 0.2s;
 }
+
 
     .profile-btn:hover {
         background-color: var(--shadow-color);

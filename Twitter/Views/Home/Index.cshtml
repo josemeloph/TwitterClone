@@ -61,7 +61,7 @@
 
     @foreach (Tweet tweet in Model.Tweets)
     {
-        <div class="post" data-tweet-id="@tweet.Id">
+        <div class="post">
             <div class="left-column">
                 <img src="~/img/MyPhoto.jpg" class="profile-img" />
             </div>
@@ -161,43 +161,4 @@
 
         tweetForm.submit();
     });
-</script>
-<script>
-    let hasLiked = false;
-
-    function handleClickCurtidas(event) {
-        const tweetId = event.target.closest('.post').dataset.tweetId;
-        hasLiked = !hasLiked;
-
-        const requestData = { tweetId: tweetId, hasLiked: hasLiked };
-
-        fetch('/Home/AtualizarCurtidas', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestData)
-        })
-            .then(response => response.json())
-            .then(data => {
-                const newNumCurtidas = data.newNumCurtidas;
-                atualizarNumCurtidasFrontend(newNumCurtidas);
-            })
-            .catch(error => {
-                console.error('Erro ao atualizar curtidas:', error);
-                // Lógica de tratamento de erro, se necessário
-            });
-    }
-
-    function atualizarNumCurtidasFrontend(num) {
-        // Atualize o número de curtidas no frontend
-        const numCurtidasElement = document.getElementById('numCurtidas');
-        numCurtidasElement.textContent = num;
-    }
-
-    // Adicione um listener para o clique na div "curtidas"
-    const curtidasDiv = document.getElementById('curtidas');
-    curtidasDiv.addEventListener('click', handleClickCurtidas) {
-        curtidasDiv.style.backgroundColor = blue;
-    }
 </script>

@@ -52,28 +52,6 @@ namespace Twitter.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult AtualizarCurtidas(int tweetId, bool hasLiked)
-        {
-            var tweet = _tweetRepositorio.BuscarPorId(tweetId);
-
-            if (tweet == null)
-            {
-                return NotFound();
-            }
-
-            if (hasLiked)
-            {
-                tweet.Curtidas--;
-            }
-            else
-            {
-                tweet.Curtidas++;
-            }
-            _tweetRepositorio.Atualizar(tweet);
-
-            return Ok(new { newNumCurtidas = tweet.Curtidas });
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

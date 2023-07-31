@@ -4,8 +4,7 @@ namespace Twitter.Models.ViewModels
 {
     public class HomeViewModel
     {
-        public List<Tweet> Tweets { get; set; }
-        public List<Usuario> Usuarios { get; set; }
+        public IEnumerable<Tweet> Tweets { get; set; }
         public Tweet Tweet { get; set; }
     }
 }

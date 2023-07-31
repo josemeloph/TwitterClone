@@ -27,9 +27,8 @@ namespace Twitter.Controllers
 
         public IActionResult Index()
         {
-            List<Tweet> tweets = _tweetRepositorio.BuscarTodos();
-            List<Usuario> usuarios = _usuarioRepositorio.BuscarTodos();
-            var viewModel = new HomeViewModel { Tweets = tweets, Usuarios = usuarios };
+            IEnumerable<Tweet> tweets = _tweetRepositorio.BuscarTodos().OrderByDescending(x => x.DataTweetado);
+            var viewModel = new HomeViewModel { Tweets = tweets};
             return View(viewModel);
         }
 

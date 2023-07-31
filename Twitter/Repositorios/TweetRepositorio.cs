@@ -3,6 +3,7 @@ using System;
 using Twitter.Data;
 using Twitter.Models;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Twitter.Repositorios
 {
@@ -17,7 +18,9 @@ namespace Twitter.Repositorios
 
         public List<Tweet> BuscarTodos()
         {
-            return _context.Tweets.ToList();
+            return _context.Tweets
+                .Include(x => x.Usuario)
+                .ToList();
         }
 
         public Tweet BuscarPorId(int id)

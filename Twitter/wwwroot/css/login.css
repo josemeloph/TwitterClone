@@ -152,7 +152,6 @@ footer {
 }
 
     footer a {
-
         text-decoration: none;
         color: rgba(0, 0, 0, .7);
         font-size: 0.76rem;
@@ -163,3 +162,222 @@ footer {
         footer a:hover {
             text-decoration: underline;
         }
+
+.modal {
+    top: 0;
+    position: fixed;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000080;
+}
+
+.modal-signup {
+    width: 43vw;
+    height: 90vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    border-radius: 15px;
+    background: white;
+}
+
+.steps {
+    padding: 10px;
+}
+
+    .steps span {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .steps header {
+        display: flex;
+        align-items: center;
+    }
+
+        .steps header div {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            width: 34px;
+            height: 34px;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+            .steps header div svg {
+                width: 20px;
+            }
+
+            .steps header div:hover {
+                background-color: rgba(200,200,200,0.6);
+            }
+
+        .steps header span {
+            margin-left: 30px;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+    .steps section {
+        padding: 0 70px;
+        display: flex;
+        width: 100%;
+    }
+
+        .steps section > div {
+            margin-top: 23px;
+        }
+
+            .steps section > div > span {
+                font-weight: 700;
+                font-size: 30px;
+            }
+
+            .steps section > div > h3 {
+                margin-top: 10px;
+                font-weight: 500;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                color: rgb(83, 100, 113);
+                font-size: 15px;
+            }
+
+            .steps section > div > div {
+                margin-top: 25px;
+            }
+
+                .steps section > div > div form {
+                    height: 58px;
+                    width: 100%;
+                    border: 1px solid rgba(56,68,77, 0.3);
+                    border-radius: 5px;
+                    margin-bottom: 35px;
+                    position: relative;
+                }
+
+                    .steps section > div > div form input {
+                        font-size: 17px;
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                        padding-left: 4px;
+                        padding-bottom: 5px;
+                        width: 97%;
+                        bottom: 5px;
+                        left: 6px;
+                        border: none;
+                        position: absolute;
+                        height: 23px;
+                    }
+
+                        .steps section > div > div form input:focus {
+                            outline: 0;
+                        }
+
+.steps section > div > div form label {
+    cursor: text;
+    user-select: none;
+    left: 10px;
+    color: rgb(56,68,77, 0.8);
+    font-size: 17px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    transform: translateY(-50%);
+    top: 50%;
+    position: absolute;
+}
+
+                    .steps section > div > div form span {
+                        left: 10px;
+                        font-size: 13px;
+                        color: red;
+                        position: absolute;
+                        top: 105%;
+                    }
+
+                    .steps section > div > div form a {
+                        text-decoration: none;
+                        left: 10px;
+                        font-size: 12.5px;
+                        color: rgb(29,161,242);
+                        position: absolute;
+                        top: 105%;
+                    }
+
+                        .steps section > div > div form a:hover {
+                            text-decoration: underline;
+                        }
+
+                .steps section > div > div strong span {
+                    color: rgb(0,0,0);
+                    margin-bottom: 7px;
+                    font-size: 16px;
+                    display: block;
+                }
+
+                .steps section > div > div span {
+                    color: rgb(83, 100, 113);
+                    line-height: 15px;
+                    font-size: 14px;
+                    display: block;
+                }
+
+                .steps section > div > div div {
+                    justify-content: space-between;
+                    display: flex;
+                    margin-top: 15px;
+                }
+
+                    .steps section > div > div div .date {
+                        position: relative;
+                    }
+
+                        .steps section > div > div div .date select {
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                            border: 1px solid rgba(56,68,77, 0.3);
+                            padding: 25px 0 9px 6px;
+                            border-radius: 5px;
+                            font-size: 17px;
+                            width: 100%;
+                        }
+
+                        .steps section > div > div div .date span {
+                            position: absolute;
+                            top: 15%;
+                            left: 6%;
+                        }
+
+#dia {
+    width: 22%;
+}
+
+#mes {
+    width: 46%;
+
+}
+
+#ano {
+    width: 26%;
+
+}
+
+.btn {
+    right: 0;
+    position: fixed;
+    padding: 0 70px;
+    left: 0;
+    bottom: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+    .btn button {
+        color: white;
+        border: none;
+        background-color: rgb(106 107 109);
+        padding: 0.9rem;
+        width: 100%;
+        font-size: 17px;
+        font-weight: 700;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }

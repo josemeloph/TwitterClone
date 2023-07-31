@@ -35,11 +35,11 @@ namespace Twitter.Models
             }
             else if(DateTime.Now.Year == DataTweetado.Year)
             {
-                return DataTweetado.ToString("d MMM");
+                return DataTweetado.Day.ToString() + " de " + DataTweetado.ToString("MMM");
             }
             else
             {
-                return DataTweetado.ToString("d MMM yyyy");
+                return DataTweetado.Day.ToString() + " de " + DataTweetado.ToString("MMM") + " de " + DataTweetado.Year.ToString();
             }
         }
     }

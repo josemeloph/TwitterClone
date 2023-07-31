@@ -72,5 +72,171 @@
         <!-- this is the copyright unicode -->
         <a href="#">&#169 2023 Twitter, Inc.</a>
     </footer>
+
+    <div class="modal " style="display: none;">
+        <div class="modal-signup" id="modal-signup" style="display: none;">
+            <div class="steps" id="step-1" style="display: none;">
+                <header>
+                    <div>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <g>
+                                <path d="M10.59 12L4.54 5.96l1.42-1.42L12 10.59l6.04-6.05 1.42 1.42L13.41 12l6.05 6.04-1.42 1.42L12 13.41l-6.04 6.05-1.42-1.42L10.59 12z"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <span>Etapa 1 de 3</span>
+                </header>
+                <section>
+                    <div>
+                        <span>Criar sua conta</span>
+                        <div>
+                            <form id="nameForm">
+                                <input id="nameInput" onfocus="focusInFunction(this, 'name', 'nameForm')" onfocusOut="focusOutFunction(this, 'name', 'nameForm')" />
+                                <label id="name">Nome</label>
+                                <span></span>
+                            </form>
+                            <form id="emailForm">
+                                <input id="emailInput" onfocus="focusInFunction(this, 'email', 'emailForm')" onfocusOut="focusOutFunction(this, 'email', 'emailForm')" />
+                                <label id="email">E-mail</label>
+                                <span></span>
+                            </form>
+                            <strong><span>Data de Nascimento</span></strong>
+                            <span>Isso não será exibido publicamente. Confirme sua própria idade,<br /> mesmo se esta conta for de empresa, de um animal de estimação ou <br />outros.</span>
+                            <div>
+                                <div class="date" id="mes">
+                                    <select>
+                                        <option disabled selected></option>
+                                        <option value="1">Janeiro</option>
+                                        <option value="2">Fevereiro</option>
+                                        <option value="3">Março</option>
+                                        <option value="3">Abril</option>
+                                        <option value="3">Maio</option>
+                                        <option value="3">Junho</option>
+                                        <option value="3">Julho</option>
+                                        <option value="3">Agosto</option>
+                                        <option value="3">Setembro</option>
+                                        <option value="3">Outubro</option>
+                                        <option value="3">Novembro</option>
+                                        <option value="3">Dezembro</option>
+                                    </select>
+                                    <span>Mês</span>
+                                </div>
+                                <div class="date" id="dia">
+                                    <select>
+                                        <option disabled selected></option>
+                                        @for (int dia = 1; dia <= 31; dia++)
+                                        {
+                                            <option value="@dia">@dia</option>
+                                        }
+                                    </select>
+                                    <span>Dia</span>
+                                </div>
+                                <div class="date" id="ano">
+                                    <select>
+                                        <option disabled selected></option>
+                                        @for (int ano = DateTime.Now.Year; ano >= 1903; ano--)
+                                        {
+                                            <option value="@ano">@ano</option>
+                                        }
+                                    </select>
+                                    <span>Ano</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="btn">
+                    <button>Avançar</button>
+                </div>
+            </div>
+            <div class="steps" id="step-2" style="display: none;">
+                <header>
+                    <div>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <g>
+                                <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <span>Etapa 2 de 3</span>
+                </header>
+                <section>
+                    <div>
+                        <span>Enviamos um código para você</span>
+                        <h3>Insira-o abaixo para verificar xxxxxgmail.com</h3>
+                        <div>
+                            <form id="codeForm">
+                                <input id="codeInput" onfocus="focusInFunction(this, 'code', 'codeForm')" onfocusOut="focusOutFunction(this, 'code', 'codeForm')" />
+                                <label id="code">Código de verificação</label>
+                                <a href="">Não recebeu o e-mail?</a>
+                            </form>
+                            </div>
+                    </div>
+                </section>
+                <div class="btn">
+                    <button>Avançar</button>
+                </div>
+            </div>
+            <div class="steps" id="step-3">
+                <header>
+                    <div>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <g>
+                                <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <span>Etapa 3 de 3</span>
+                </header>
+                <section>
+                    <div>
+                        <span>Você precisará de uma senha</span>
+                        <h3>É preciso ter 8 caracteres ou mais.</h3>
+                        <div>
+                            <form id="passwordForm">
+                                <input id="passwordInput" onfocus="focusInFunction(this, 'password', 'passwordForm')" onfocusOut="focusOutFunction(this, 'password', 'passwordForm')" />
+                                <label id="password">Senha</label>
+                                <span></span>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+                <div class="btn">
+                    <button>Avançar</button>
+                </div>
+            </div>
+      
+        </div>
+    </div>
+
+
+    <script>
+
+        function focusOutFunction(e, idLabel, idForm) {
+            if (e.value.length > 0) {
+                document.getElementById(idLabel).style.top = "30%";
+                document.getElementById(idLabel).style.fontSize = "14px";
+            }
+            else {
+                document.getElementById(idLabel).style.top = "50%";
+                document.getElementById(idLabel).style.fontSize = "17px";
+            }
+            document.getElementById(idLabel).style.color = "rgb(56, 68, 77, 0.8)";
+            document.getElementById(idForm).style.border = "1px solid rgba(56,68,77, 0.3)";
+        }
+
+        function focusInFunction(e, idLabel, idForm) {
+            document.getElementById(idLabel).style.top = "30%";
+            document.getElementById(idLabel).style.fontSize = "14px";
+            document.getElementById(idLabel).style.color = "rgb(29,161,242)";
+            document.getElementById(idForm).style.border = "1px solid rgb(29,161,242)";
+        }
+    </script>
+
 </body>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
 </html>

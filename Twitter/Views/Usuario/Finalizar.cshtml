@@ -1,0 +1,364 @@
+﻿@model Usuario
+@{
+    string mensagem = TempData["MensagemErro"] as string;
+}
+
+<div class="modal">
+    <div class="modal-signup">
+        <form asp-action="Finalizar" asp-controller="Usuario" class="form-signup" enctype="multipart/form-data">
+            <div class="steps" id="profile-img" >
+                <header>
+                    <div>
+                        <img src="~/img/twitter-logo-2-1.png" />
+                    </div>
+                </header>
+                <section>
+                    <div>
+                        <span>Escolher uma foto de perfil</span>
+                        <h3>Tem uma selfie favorita? Carregue agora.</h3>
+                        <div>
+                            <div class="bg-img"></div>
+                            <div class="custom-file-input">
+                                <label for="imagem">
+                                    <svg>
+                                        <g>
+                                            <path d="M9.697 3H11v2h-.697l-3 2H5c-.276 0-.5.224-.5.5v11c0 .276.224.5.5.5h14c.276 0 .5-.224.5-.5V10h2v8.5c0 1.381-1.119 2.5-2.5 2.5H5c-1.381 0-2.5-1.119-2.5-2.5v-11C2.5 6.119 3.619 5 5 5h1.697l3-2zM12 10.5c-1.105 0-2 .895-2 2s.895 2 2 2 2-.895 2-2-.895-2-2-2zm-4 2c0-2.209 1.791-4 4-4s4 1.791 4 4-1.791 4-4 4-4-1.791-4-4zM17 2c0 1.657-1.343 3-3 3v1c1.657 0 3 1.343 3 3h1c0-1.657 1.343-3 3-3V5c-1.657 0-3-1.343-3-3h-1z"></path>
+                                        </g>
+                                    </svg>
+                                </label>
+                                <input type="file" id="imagem" name="imagem" accept=".jpg, .jpeg, .png" onchange="previewImagem(this);" />
+                            </div>
+                                <img class="imagem" id="imagem-preview" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png">
+                        </div>
+                    </div>
+                </section>
+                <div class="btn">
+                    <div class="button" id="btn-profile-img">Avançar</div>
+                </div>
+
+            </div>
+            <div class="steps" id="profile-tag" style="display: none;">
+                <header>
+                    <div>
+                        <img src="~/img/twitter-logo-2-1.png" />
+                    </div>
+                </header>
+                <section>
+                    <div>
+                        <span>Como devemos chamar você?</span>
+                        <h3>Seu nome de usuário é exclusivo. Você sempre pode alterá-lo depois.</h3>
+                        <div>
+                            <div style="margin-top: -50px" id="tagForm" class="inputs">
+                                <input asp-for="Tag" id="tagInput" onfocus="focusInFunction(this, 'tag', 'tagForm')" onfocusOut="focusOutFunction(this, 'tag', 'tagForm')" />
+                                <label id="tag">Nome de usuário</label>
+                                <span>@mensagem</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+                <div class="btn">
+                    <input type="hidden" asp-for="Id" name="UsuarioId" value="@Model.Id"/>
+                    <button class="button" >Avançar</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function previewImagem(input) {
+        var imagemPreview = document.getElementById('imagem-preview');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                imagemPreview.src = e.target.result;
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function focusOutFunction(e, idLabel, idForm) {
+        if (e.value.length > 0) {
+            document.getElementById(idLabel).style.top = "30%";
+            document.getElementById(idLabel).style.fontSize = "14px";
+        }
+        else {
+            document.getElementById(idLabel).style.top = "50%";
+            document.getElementById(idLabel).style.fontSize = "17px";
+        }
+        document.getElementById(idLabel).style.color = "rgb(56, 68, 77, 0.8)";
+        document.getElementById(idForm).style.border = "1px solid rgba(56,68,77, 0.3)";
+    }
+
+    function focusInFunction(e, idLabel, idForm) {
+        document.getElementById(idLabel).style.top = "30%";
+        document.getElementById(idLabel).style.fontSize = "14px";
+        document.getElementById(idLabel).style.color = "rgb(29,161,242)";
+        document.getElementById(idForm).style.border = "1px solid rgb(29,161,242)";
+    }
+
+    document.getElementById('btn-profile-img').addEventListener('click', function () {
+        document.getElementById('profile-img').style.display = "none";
+        document.getElementById('profile-tag').style.display = "block";
+    });
+
+</script>
+<style>
+    .bg-img {
+        border-radius: 9999px;
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        background: rgb(0 0 0 / 40%);
+    }
+    .custom-file-input {
+        margin-top: 65px;
+        position: absolute;
+        cursor: pointer;
+    }
+
+        .custom-file-input svg {
+            cursor: pointer;
+            fill: rgb(255 255 255 / 70%);
+            border-radius: 9999px;
+            display: block;
+            width: 43px;
+            height: 43px;
+            background-color: rgb(39 46 51);
+            padding: 10px;
+        }
+
+        .custom-file-input input[type="file"] {
+
+            display: none;
+        }
+
+    .imagem {
+        object-fit: cover;
+        border-radius: 9999px;
+        width: 180px;
+        height: 180px;
+        cursor: default;
+    }
+    .modal {
+        top: 0;
+        position: fixed;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #00000080;
+    }
+
+
+    .modal-signup {
+        width: 43vw;
+        height: 90vh;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+        border-radius: 15px;
+        background: white;
+    }
+
+    .form-signup .steps {
+        padding: 10px;
+    }
+
+        .form-signup .steps span {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .form-signup .steps header {
+            display: flex;
+            align-items: center;
+        }
+
+            .form-signup .steps header div {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+            }
+
+                .form-signup .steps header div img {
+                    width: 36px;
+                    cursor: default;
+                }
+
+        .form-signup .steps section {
+            color: black;
+            padding: 0 70px;
+            display: flex;
+            width: 100%;
+        }
+
+            .form-signup .steps section > div {
+                width: 100%;
+                margin-top: 23px;
+            }
+
+                .form-signup .steps section > div > span {
+                    font-weight: 700;
+                    font-size: 30px;
+                }
+
+                .form-signup .steps section > div > h3 {
+                    margin-top: 10px;
+                    font-weight: 500;
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                    color: rgb(83, 100, 113);
+                    font-size: 15px;
+                }
+
+                .form-signup .steps section > div > div {
+                    display: flex;
+                    margin-top: 85px;
+                    justify-content: center;
+                    position: relative;
+                }
+
+                    .form-signup .steps section > div > div .inputs {
+                        height: 58px;
+                        width: 100%;
+                        border: 1px solid rgba(56,68,77, 0.3);
+                        border-radius: 5px;
+                        margin-bottom: 35px;
+                        position: relative;
+                    }
+
+                        .form-signup .steps section > div > div .inputs input {
+                            font-size: 17px;
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                            padding-left: 4px;
+                            padding-bottom: 5px;
+                            width: 97%;
+                            bottom: 5px;
+                            left: 6px;
+                            border: none;
+                            position: absolute;
+                            height: 23px;
+                        }
+
+                            .form-signup .steps section > div > div .inputs input:focus {
+                                outline: 0;
+                            }
+
+                        .form-signup .steps section > div > div .inputs label {
+                            cursor: text;
+                            user-select: none;
+                            left: 10px;
+                            color: rgb(56,68,77, 0.8);
+                            font-size: 17px;
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                            transform: translateY(-50%);
+                            top: 50%;
+                            position: absolute;
+                        }
+
+                        .form-signup .steps section > div > div .inputs span {
+                            left: 10px;
+                            font-size: 13px;
+                            color: red;
+                            position: absolute;
+                            top: 105%;
+                        }
+
+                        .form-signup .steps section > div > div .inputs a {
+                            text-decoration: none;
+                            left: 10px;
+                            font-size: 12.5px;
+                            color: rgb(29,161,242);
+                            position: absolute;
+                            top: 105%;
+                        }
+
+                            .form-signup .steps section > div > div .inputs a:hover {
+                                text-decoration: underline;
+                            }
+
+
+                    .form-signup .steps section > div > div strong span {
+                        color: rgb(0,0,0);
+                        margin-bottom: 7px;
+                        font-size: 16px;
+                        display: block;
+                    }
+
+                    .form-signup .steps section > div > div span {
+                        color: rgb(83, 100, 113);
+                        line-height: 15px;
+                        font-size: 14px;
+                        display: block;
+                    }
+
+                    .form-signup .steps section > div > div .date-inputs div {
+                        justify-content: space-between;
+                        display: flex;
+                        margin-top: 15px;
+                    }
+
+                        .form-signup .steps section > div > div .date-inputs div .date {
+                            position: relative;
+                        }
+
+                            .form-signup .steps section > div > div .date-inputs div .date select {
+                                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                                border: 1px solid rgba(56,68,77, 0.3);
+                                padding: 25px 0 9px 6px;
+                                border-radius: 5px;
+                                font-size: 17px;
+                                width: 100%;
+                            }
+
+                            .form-signup .steps section > div > div .date-inputs div .date span {
+                                position: absolute;
+                                top: 15%;
+                                left: 6%;
+                            }
+
+
+    #dia {
+        width: 22%;
+    }
+
+    #mes {
+        width: 46%;
+    }
+
+    #ano {
+        width: 26%;
+    }
+
+
+    .btn {
+        right: 0;
+        position: fixed;
+        padding: 0 70px;
+        left: 0;
+        bottom: 24px;
+        display: flex;
+        justify-content: center;
+    }
+
+        .btn .button {
+            color: white;
+            border: none;
+            background-color: rgb(106 107 109);
+            padding: 0.9rem;
+            width: 100%;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            border: 1px solid rgba(0, 0, 0, .2);
+            border-radius: 100vw;
+            cursor: pointer;
+            text-align: center;
+        }
+
+</style>

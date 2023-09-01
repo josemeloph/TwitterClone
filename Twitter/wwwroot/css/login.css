@@ -7,6 +7,8 @@
     font-family: 'Poppins', sans-serif;
 }
 
+html {
+}
 body {
 }
 
@@ -104,10 +106,17 @@ button {
     }
 
 .phone_btn {
+    text-decoration: none;
+    text-align: center; 
     padding: .6rem;
     background-color: #1D9BF0;
     color: #fff;
     border: none;
+    width: 300px;
+    border-radius: 100vw;
+    font-weight: 500;
+    font-size: .9rem;
+    cursor: pointer;
 }
 
 p {
@@ -163,6 +172,7 @@ footer {
             text-decoration: underline;
         }
 
+
 .modal {
     top: 0;
     position: fixed;
@@ -171,6 +181,7 @@ footer {
     height: 100vh;
     background-color: #00000080;
 }
+
 
 .modal-signup {
     width: 43vw;
@@ -184,20 +195,20 @@ footer {
     background: white;
 }
 
-.steps {
+.form-signup .steps {
     padding: 10px;
 }
 
-    .steps span {
+    .form-signup .steps span {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
-    .steps header {
+    .form-signup .steps header {
         display: flex;
         align-items: center;
     }
 
-        .steps header div {
+        .form-signup .steps header div {
             justify-content: center;
             align-items: center;
             display: flex;
@@ -208,36 +219,37 @@ footer {
             transition: 0.2s;
         }
 
-            .steps header div svg {
+            .form-signup .steps header div svg {
                 width: 20px;
             }
 
-            .steps header div:hover {
+            .form-signup .steps header div:hover {
                 background-color: rgba(200,200,200,0.6);
             }
 
-        .steps header span {
+        .form-signup .steps header span {
             margin-left: 30px;
             font-weight: 700;
             font-size: 20px;
         }
 
-    .steps section {
+    .form-signup .steps section {
         padding: 0 70px;
         display: flex;
         width: 100%;
     }
 
-        .steps section > div {
+        .form-signup .steps section > div {
+            width: 100%;
             margin-top: 23px;
         }
 
-            .steps section > div > span {
+            .form-signup .steps section > div > span {
                 font-weight: 700;
                 font-size: 30px;
             }
 
-            .steps section > div > h3 {
+            .form-signup .steps section > div > h3 {
                 margin-top: 10px;
                 font-weight: 500;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -245,11 +257,10 @@ footer {
                 font-size: 15px;
             }
 
-            .steps section > div > div {
+            .form-signup .steps section > div > div {
                 margin-top: 25px;
             }
-
-                .steps section > div > div form {
+                .form-signup .steps section > div > div .inputs {
                     height: 58px;
                     width: 100%;
                     border: 1px solid rgba(56,68,77, 0.3);
@@ -258,7 +269,7 @@ footer {
                     position: relative;
                 }
 
-                    .steps section > div > div form input {
+                    .form-signup .steps section > div > div .inputs input {
                         font-size: 17px;
                         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                         padding-left: 4px;
@@ -271,23 +282,23 @@ footer {
                         height: 23px;
                     }
 
-                        .steps section > div > div form input:focus {
+                        .form-signup .steps section > div > div .inputs input:focus {
                             outline: 0;
                         }
 
-.steps section > div > div form label {
-    cursor: text;
-    user-select: none;
-    left: 10px;
-    color: rgb(56,68,77, 0.8);
-    font-size: 17px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    transform: translateY(-50%);
-    top: 50%;
-    position: absolute;
-}
+                    .form-signup .steps section > div > div .inputs label {
+                        cursor: text;
+                        user-select: none;
+                        left: 10px;
+                        color: rgb(56,68,77, 0.8);
+                        font-size: 17px;
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                        transform: translateY(-50%);
+                        top: 50%;
+                        position: absolute;
+                    }
 
-                    .steps section > div > div form span {
+                    .form-signup .steps section > div > div .inputs span {
                         left: 10px;
                         font-size: 13px;
                         color: red;
@@ -295,7 +306,7 @@ footer {
                         top: 105%;
                     }
 
-                    .steps section > div > div form a {
+                    .form-signup .steps section > div > div .inputs a {
                         text-decoration: none;
                         left: 10px;
                         font-size: 12.5px;
@@ -304,35 +315,35 @@ footer {
                         top: 105%;
                     }
 
-                        .steps section > div > div form a:hover {
+                        .form-signup .steps section > div > div .inputs a:hover {
                             text-decoration: underline;
                         }
 
-                .steps section > div > div strong span {
+
+                .form-signup .steps section > div > div strong span {
                     color: rgb(0,0,0);
                     margin-bottom: 7px;
                     font-size: 16px;
                     display: block;
                 }
 
-                .steps section > div > div span {
+                .form-signup .steps section > div > div span {
                     color: rgb(83, 100, 113);
                     line-height: 15px;
                     font-size: 14px;
                     display: block;
                 }
 
-                .steps section > div > div div {
+                .form-signup .steps section > div > div .date-inputs div {
                     justify-content: space-between;
                     display: flex;
                     margin-top: 15px;
                 }
-
-                    .steps section > div > div div .date {
+                    .form-signup .steps section > div > div .date-inputs div .date {
                         position: relative;
                     }
 
-                        .steps section > div > div div .date select {
+                        .form-signup .steps section > div > div .date-inputs div .date select {
                             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                             border: 1px solid rgba(56,68,77, 0.3);
                             padding: 25px 0 9px 6px;
@@ -341,11 +352,12 @@ footer {
                             width: 100%;
                         }
 
-                        .steps section > div > div div .date span {
+                        .form-signup .steps section > div > div .date-inputs div .date span {
                             position: absolute;
                             top: 15%;
                             left: 6%;
                         }
+
 
 #dia {
     width: 22%;
@@ -361,6 +373,7 @@ footer {
 
 }
 
+
 .btn {
     right: 0;
     position: fixed;
@@ -371,7 +384,7 @@ footer {
     justify-content: center;
 }
 
-    .btn button {
+    .btn .button {
         color: white;
         border: none;
         background-color: rgb(106 107 109);
@@ -380,4 +393,8 @@ footer {
         font-size: 17px;
         font-weight: 700;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: 100vw;
+        cursor: pointer;
+        text-align: center;
     }

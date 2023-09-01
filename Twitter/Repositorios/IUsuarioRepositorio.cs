@@ -13,11 +13,14 @@ namespace Twitter.Repositorios
         List<Usuario> BuscarTodos();
 
         Usuario BuscarPorId(int id);
+        Usuario BuscarPorEmail(string email);
+        Usuario BuscarPorTag(string tag);
 
         Usuario Adicionar(Usuario usuario);
 
         Usuario Atualizar(Usuario usuario);
 
         bool Apagar(int id);
+        bool ApagarTodos();
     }
 }

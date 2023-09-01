@@ -32,7 +32,7 @@ namespace Twitter
             services.AddDbContext<TwitterContext>(opt => opt.UseMySql(stringDeConexao, ServerVersion.AutoDetect(stringDeConexao)));
 
             services.AddScoped<ITweetRepositorio, TweetRepositorio>();
-            services.AddScoped<IUsuarioRepositorio, UsuarioRepostorio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

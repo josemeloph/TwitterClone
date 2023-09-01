@@ -1,0 +1,231 @@
+﻿@model UsuarioViewModel
+
+@{
+    Layout = "_LayoutDeslogado";
+    string mensagem = TempData["MensagemErro"] as string;
+}
+<div class="modal">
+    <div class="modal-signup">
+        <form asp-action="Criar" asp-controller="Usuario" class="form-signup">
+            <div class="steps" id="step-1">
+                <header>
+                    <a asp-action="Index" asp-controller="Usuario">
+                        <div id="close">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <g>
+                                    <path d="M10.59 12L4.54 5.96l1.42-1.42L12 10.59l6.04-6.05 1.42 1.42L13.41 12l6.05 6.04-1.42 1.42L12 13.41l-6.04 6.05-1.42-1.42L10.59 12z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </a>   
+                    <span>Etapa 1 de 3</span>
+                </header>
+                <section>
+                    <div>
+                        <span>Criar sua conta</span>
+                        <div>
+                            <div id="nameForm" class="inputs">
+                                <input asp-for="Usuario.Nome" id="nameInput" onfocus="focusInFunction(this, 'name', 'nameForm')" onfocusOut="focusOutFunction(this, 'name', 'nameForm')" />
+                                <label id="name">Nome</label>
+                                <span asp-validation-for="Usuario.Nome"></span>
+                            </div>
+                            <div id="emailForm" class="inputs">
+                                <input asp-for="Usuario.Email" id="emailInput" onfocus="focusInFunction(this, 'email', 'emailForm')" onfocusOut="focusOutFunction(this, 'email', 'emailForm')" />
+                                <label id="email">E-mail</label>
+                                <span asp-validation-for="Usuario.Email"></span>
+                                <span>@mensagem</span>
+                            </div>
+                            <strong><span>Data de Nascimento</span></strong>
+                            <span>Isso não será exibido publicamente. Confirme sua própria idade,<br /> mesmo se esta conta for de empresa, de um animal de estimação ou <br />outros.</span>
+                            <div class="date-inputs">
+                                <div>
+                                    <div class="date" id="mes">
+                                        <select asp-for="Mes">
+                                            <option disabled selected></option>
+                                            <option value="1">Janeiro</option>
+                                            <option value="2">Fevereiro</option>
+                                            <option value="3">Março</option>
+                                            <option value="3">Abril</option>
+                                            <option value="3">Maio</option>
+                                            <option value="3">Junho</option>
+                                            <option value="3">Julho</option>
+                                            <option value="3">Agosto</option>
+                                            <option value="3">Setembro</option>
+                                            <option value="3">Outubro</option>
+                                            <option value="3">Novembro</option>
+                                            <option value="3">Dezembro</option>
+                                        </select>
+                                        <span class="date-span">Mês</span>
+                                    </div>
+                                    <div class="date" id="dia">
+                                        <select asp-for="Dia">
+                                            <option disabled selected></option>
+                                            @for (int dia = 1; dia <= 31; dia++)
+                                            {
+                                                <option value="@dia">@dia</option>
+                                            }
+                                        </select>
+                                        <span>Dia</span>
+                                    </div>
+                                    <div class="date" id="ano">
+                                        <select asp-for="Ano">
+                                            <option disabled selected></option>
+                                            @for (int ano = DateTime.Now.Year; ano >= 1903; ano--)
+                                            {
+                                                <option value="@ano">@ano</option>
+                                            }
+                                        </select>
+
+                                        <span>Ano</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="btn">
+                    <div class="button" id="btn-step-1">Avançar</div>
+                </div>
+            </div>
+            <div class="steps" id="step-2" style="display: none;">
+                <header class="cadastro-header">
+                    <div id="back-to-1">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <g>
+                                <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <span>Etapa 2 de 3</span>
+                </header>
+                <section>
+                    <div>
+                        <span>Enviamos um código para você</span>
+                        <h3>Insira-o abaixo para verificar xxxxxgmail.com</h3>
+                        <div>
+                            <div id="codeForm" class="inputs">
+                                <input asp-for="Usuario.CodigoVerificacao" id="codeInput" onfocus="focusInFunction(this, 'code', 'codeForm')" onfocusOut="focusOutFunction(this, 'code', 'codeForm')" />
+                                <label id="code">Código de verificação</label>
+                                <a href="">Não recebeu o e-mail?</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="btn">
+                    <div class="button" id="btn-step-2">Avançar</div>
+                </div>
+            </div>
+            <div class="steps" id="step-3" style="display: none;">
+                <header>
+                    <div id="back-to-2">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <g>
+                                <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <span>Etapa 3 de 3</span>
+                </header>
+                <section>
+                    <div>
+                        <span>Você precisará de uma senha</span>
+                        <h3>É preciso ter 8 caracteres ou mais.</h3>
+                        <div>
+                            <div id="passwordForm" class="inputs">
+                                <input asp-for="Usuario.Senha" id="passwordInput" onfocus="focusInFunction(this, 'password', 'passwordForm')" onfocusOut="focusOutFunction(this, 'password', 'passwordForm')" />
+                                <label id="password">Senha</label>
+                                <span asp-validation-for="Usuario.Senha"></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="btn">
+                    <button id="btn-step-3" class="button" type="submit">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    function focusOutFunction(e, idLabel, idForm) {
+        if (e.value.length > 0) {
+            document.getElementById(idLabel).style.top = "30%";
+            document.getElementById(idLabel).style.fontSize = "14px";
+        }
+        else {
+            document.getElementById(idLabel).style.top = "50%";
+            document.getElementById(idLabel).style.fontSize = "17px";
+        }
+        document.getElementById(idLabel).style.color = "rgb(56, 68, 77, 0.8)";
+        document.getElementById(idForm).style.border = "1px solid rgba(56,68,77, 0.3)";
+    }
+
+    function focusInFunction(e, idLabel, idForm) {
+        document.getElementById(idLabel).style.top = "30%";
+        document.getElementById(idLabel).style.fontSize = "14px";
+        document.getElementById(idLabel).style.color = "rgb(29,161,242)";
+        document.getElementById(idForm).style.border = "1px solid rgb(29,161,242)";
+    }
+
+    document.getElementById('create-account').addEventListener('click', function () {
+        var div = document.getElementById('modal');
+        div.style.display = "block";
+    });
+
+    document.getElementById('btn-step-1').addEventListener('click', function () {
+        document.getElementById('step-1').style.display = "none";
+        document.getElementById('step-2').style.display = "block";
+    });
+
+    document.getElementById('btn-step-2').addEventListener('click', function () {
+        document.getElementById('step-2').style.display = "none";
+        document.getElementById('step-3').style.display = "block";
+    });
+
+    document.getElementById('close').addEventListener('click', function () {
+        document.getElementById('modal').style.display = "none";
+    });
+
+    document.getElementById('back-to-1').addEventListener('click', function () {
+        document.getElementById('step-2').style.display = "none";
+        document.getElementById('step-1').style.display = "block";
+    });
+
+    document.getElementById('back-to-2').addEventListener('click', function () {
+        document.getElementById('step-3').style.display = "none";
+        document.getElementById('step-2').style.display = "block";
+    });
+
+    /*
+    document.getElementById('btn-step-3').addEventListener('click', function () {
+        var form1 = document.getElementById('step-1');
+        var form2 = document.getElementById('step-2');
+        var form3 = document.getElementById('step-3');
+
+        var formData1 = new FormData(form1);
+        var formData2 = new FormData(form2);
+        var formData3 = new FormData(form3);
+
+        for (var pair of formData2.entries()) {
+            formData1.append(pair[0], pair[1]);
+        }
+        for (var pair of formData3.entries()) {
+            formData1.append(pair[0], pair[1]);
+        }
+
+        fetch(form1.action, {
+            method: 'POST',
+            body: formData1
+        })
+    });
+    */
+
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

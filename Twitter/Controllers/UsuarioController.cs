@@ -11,16 +11,22 @@ using static System.Net.Mime.MediaTypeNames;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Primitives;
+using Twitter.Helper;
+using Twitter.Filters;
 
 namespace Twitter.Controllers
 {
     public class UsuarioController : Controller
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private readonly ITweetRepositorio _tweetRepositorio;
+        private readonly ISessao _sessao;
 
-        public UsuarioController(IUsuarioRepositorio usuarioRepostorio)
+        public UsuarioController(IUsuarioRepositorio usuarioRepostorio, ISessao sessao, ITweetRepositorio tweetRepositorio)
         {
             _usuarioRepositorio = usuarioRepostorio;
+            _sessao = sessao;
+            _tweetRepositorio = tweetRepositorio;
         }
 
         public IActionResult Index()
@@ -49,7 +55,8 @@ namespace Twitter.Controllers
 
                 usuarioViewModel.Usuario.DataNascimento = new DateTime(usuarioViewModel.Ano, usuarioViewModel.Mes, usuarioViewModel.Dia);
                 _usuarioRepositorio.Adicionar(usuarioViewModel.Usuario);
-                return RedirectToAction(nameof(Finalizar), new { usuarioId = usuarioViewModel.Usuario.Id });
+                _sessao.CriarSessaoUsuario(usuarioViewModel.Usuario);
+                return RedirectToAction(nameof(Finalizar));
             }
             catch
             {
@@ -57,9 +64,10 @@ namespace Twitter.Controllers
             }
         }
 
-        public IActionResult Finalizar(int usuarioId)
+        public IActionResult Finalizar()
         {
-            var usuario = _usuarioRepositorio.BuscarPorId(usuarioId);
+            var user = _sessao.BuscarSessaoUsuario();
+            var usuario = _usuarioRepositorio.BuscarPorId(user.Id);
             return View(usuario);
         }
 
@@ -97,6 +105,7 @@ namespace Twitter.Controllers
                     user.Tag = tag;
                 }
                 _usuarioRepositorio.Atualizar(user);
+                _sessao.CriarSessaoUsuario(user);
                 return RedirectToAction("Index", "Home");
             }
             catch
@@ -149,15 +158,22 @@ namespace Twitter.Controllers
                 var user = _usuarioRepositorio.BuscarPorTag(login.Tag);
                 if (user.SenhaValida(login.Senha))
                 {
+                    _sessao.CriarSessaoUsuario(user);
                     return RedirectToAction("Index", "Home");
                 }
                 TempData["MensagemErro"] = "Senha inválida";
-                return View();
+                return View(login);
             }
             catch
             {
-                return View();
+                return View(login);
             }
+        }
+
+        public IActionResult Sair()
+        {
+            _sessao.RemoverSessaoUsuario();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

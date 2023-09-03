@@ -14,7 +14,8 @@
         </div>
         <div class="right-column">
             <form asp-controller ="Home" asp-action="Tweetar" id="tweetForm" class="top-row" method="post">
-                <input asp-for="Tweet.Conteudo" placeholder="O que está acontecendo?" />
+  
+                <textarea asp-for="Tweet.Conteudo" id="tweetTxtArea" placeholder="O que está acontecendo?" rows="1" cols="50" oninput="autoExpand(this)" maxlength="280"></textarea>         
                 <div class="bottom-row">
                     <div class="buttons">
                         <div>
@@ -64,7 +65,7 @@
     {
         <div class="post">
             <div class="left-column">
-                <img src="~/img/MyPhoto.jpg" class="profile-img" />
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(tweet.Usuario.ImagemPerfil)" alt="profile" class="profile-img" />
             </div>
             <div class="right-column">
                 <article class="top-row">
@@ -87,7 +88,7 @@
                             </svg>
                         </div>
                     </header>
-                    <p>@tweet.Conteudo</p>
+                    <p style="max-width: 500px; word-wrap: break-word;">@tweet.Conteudo</p>
                     <!--
                     <img src="~/img/twitter-logo-2-1.png" style="width: 100%; border-radius: 25px; border: 1px solid rgb(56,68,77); margin-top: 10px;" />
                     -->
@@ -154,5 +155,31 @@
 </style>
 
 <script>
+    function autoExpand(textarea) {
+        var maxLength = parseInt(textarea.getAttribute('maxlength'));
+        var currentText = textarea.value;
+
+        if (currentText.length > maxLength) {
+            textarea.value = currentText.substring(0, maxLength);
+        }
+
+        textarea.style.height = "1px";
+        textarea.style.height = (textarea.scrollHeight) + "px";
+    }
+
+    const textarea = document.getElementById('tweetTxtArea');
+    const botao = document.getElementById('tweetBtn');
+
+    textarea.addEventListener('input', function () {
+        if (textarea.value.trim() === '') {
+            botao.disabled = true;
+            botao.style.opacity = "0.5";
+            botao.style.cursor = "default";
+        } else {
+            botao.style.opacity = "0.9";
+            botao.disabled = false;
+            botao.style.cursor = "pointer";
+        }
+    });
 
 </script>

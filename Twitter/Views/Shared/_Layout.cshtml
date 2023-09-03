@@ -116,26 +116,10 @@
                             </svg>
                         </button>
                     </div>
-                    <div id="redirecionarDiv" class="profile-btn">   
-                        <div class="left-column">
-                            <img src="~/img/MyPhoto.jpg" alt="profile" class="profile-img" />
-                        </div>
-                        <div class="right-column">
-                            <div>
-                                <strong>Username</strong>
-                                <span>usertag</span>
-                            </div>
-                            <div>
-                                <svg class="dot" viewBox="0 0 24 24" aria-hidden="true">
-                                    <g>
-                                        <circle cx="5" cy="12" r="2"></circle>
-                                        <circle cx="12" cy="12" r="2"></circle>
-                                        <circle cx="19" cy="12" r="2"></circle>
-                                    </g>
-                                </svg>
-                            </div>
-                        </div>
+                    <div class="profile-btn">   
+                      @await Component.InvokeAsync("Menu")
                     </div>
+                    <a asp-action="Sair" asp-controller="Usuario">Sair</a>
                 </div>
             </nav>
         </aside>
@@ -151,13 +135,7 @@
     @await RenderSectionAsync("Scripts", required: false)
 
     <script>
-        // Função que redireciona para a outra página
-        function redirecionarParaOutraPagina() {
-            window.location.href = "/Usuario"; // Substitua "/outraPagina" pelo caminho da página de destino
-        }
 
-        // Adicione um evento de clique à div
-        document.getElementById("redirecionarDiv").addEventListener("click", redirecionarParaOutraPagina);
     </script>
 </body>
 </html>

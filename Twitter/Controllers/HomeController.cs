@@ -6,23 +6,29 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Twitter.Filters;
+using Twitter.Helper;
 using Twitter.Models;
 using Twitter.Models.ViewModels;
 using Twitter.Repositorios;
 
 namespace Twitter.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ITweetRepositorio _tweetRepositorio;
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private readonly ISessao _sessao;
 
-        public HomeController(ILogger<HomeController> logger, ITweetRepositorio tweetRepositorio, IUsuarioRepositorio usuarioRepositorio)
+        public HomeController(ILogger<HomeController> logger, ITweetRepositorio tweetRepositorio, 
+            IUsuarioRepositorio usuarioRepositorio, ISessao sessao)
         {
             _logger = logger;
             _tweetRepositorio = tweetRepositorio;
             _usuarioRepositorio = usuarioRepositorio;
+            _sessao = sessao;
         }
 
         public IActionResult Index()
@@ -37,8 +43,8 @@ namespace Twitter.Controllers
         {
             try
             {
-                int userId = 34;
-                tweet.UsuarioId = userId;
+                var user = _sessao.BuscarSessaoUsuario();
+                tweet.UsuarioId = user.Id;
                 _tweetRepositorio.Adicionar(tweet);
                 return RedirectToAction(nameof(Index));
 

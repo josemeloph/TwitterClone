@@ -54,5 +54,27 @@ namespace Twitter.Repositorios
             _context.SaveChanges();
             return true;
         }
+
+        public bool ApagarTodos()
+        {
+            var tweets = BuscarTodos();
+            foreach (Tweet tweet in tweets)
+            {
+                _context.Tweets.Remove(tweet);
+            }
+            _context.SaveChanges();
+            return true;
+        }
+
+        public bool ApagarTodosDoUsuario(int userId)
+        {
+            var tweets = _context.Tweets.Where(s => s.UsuarioId == userId).ToList();
+            foreach(var tweet in tweets)
+            {
+                _context.Tweets.Remove(tweet);
+            }
+            _context.SaveChanges();
+            return true;
+        }
     }
 }

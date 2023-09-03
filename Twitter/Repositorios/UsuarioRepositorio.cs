@@ -38,6 +38,7 @@ namespace Twitter.Repositorios
         public Usuario Adicionar(Usuario usuario)
         {
             usuario.DataCadastro = DateTime.Now;
+            usuario.SetSenhaHash();
             _context.Usuarios.Add(usuario);
             _context.SaveChanges();
             return usuario;
@@ -64,7 +65,7 @@ namespace Twitter.Repositorios
 
         public bool ApagarTodos()
         {
-            IEnumerable<Usuario> usuarios = BuscarTodos();
+            var usuarios = BuscarTodos();
             foreach(Usuario usuario in usuarios)
             {
                 _context.Usuarios.Remove(usuario);

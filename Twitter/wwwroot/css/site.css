@@ -153,6 +153,7 @@ left-navbar {
 
 
 .left-side .right-column {
+    position: relative;
     display: flex;
     align-items: center;
 }
@@ -168,7 +169,7 @@ left-navbar {
     margin: 12px 0;
     padding: 12px;
     cursor: pointer;
-    width: calc(100% + 12px);
+    width: 240px;
     border-radius: 9999px;
     transition: 0.2s;
 }
@@ -238,7 +239,7 @@ left-navbar {
 }
 
 .right-column {
-    margin-left: 15px;
+    margin-left: 7px;
 }
 
 .profile-img {
@@ -379,22 +380,26 @@ left-navbar {
 
 .right-column,
 .right-column form,
-.right-column input {
+.right-column textarea {
     width: 100%;
 }
 
-    .right-column input {
-        line-height: 20px;
+    .right-column textarea {
+        resize: none;
+        overflow: hidden;
+        margin-top: 10px;
+        outline: none;
+        line-height: 22px;
         font-family: inherit;
         font-weight: 400;
         font-size: 20px;
         color: rgb(255,255,255);
-        height: 56px;
+        min-height: 40px;
         background: transparent;
         border: none;
     }
 
-        .right-column input::placeholder,
+        .right-column textarea::placeholder,
         .search::placeholder {
             font-size: 20px;
             color: #8899A6;
@@ -418,6 +423,7 @@ left-navbar {
 
 
     .tweet .right-column .bottom-row .tweet-btn {
+        cursor: default;
         height: 34px;
         width: 90px;
         opacity: 0.5;

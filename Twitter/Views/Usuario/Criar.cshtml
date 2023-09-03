@@ -90,13 +90,15 @@
             </div>
             <div class="steps" id="step-2" style="display: none;">
                 <header class="cadastro-header">
-                    <div id="back-to-1">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <g>
-                                <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
-                            </g>
-                        </svg>
-                    </div>
+                    <a id="back-to-1">
+                        <div id="close" >
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <g>
+                                    <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </a>
                     <span>Etapa 2 de 3</span>
                 </header>
                 <section>
@@ -118,13 +120,15 @@
             </div>
             <div class="steps" id="step-3" style="display: none;">
                 <header>
-                    <div id="back-to-2">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <g>
-                                <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
-                            </g>
-                        </svg>
-                    </div>
+                    <a id="back-to-2">
+                        <div id="close">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <g>
+                                    <path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </a>
                     <span>Etapa 3 de 3</span>
                 </header>
                 <section>
@@ -169,11 +173,6 @@
         document.getElementById(idLabel).style.color = "rgb(29,161,242)";
         document.getElementById(idForm).style.border = "1px solid rgb(29,161,242)";
     }
-
-    document.getElementById('create-account').addEventListener('click', function () {
-        var div = document.getElementById('modal');
-        div.style.display = "block";
-    });
 
     document.getElementById('btn-step-1').addEventListener('click', function () {
         document.getElementById('step-1').style.display = "none";

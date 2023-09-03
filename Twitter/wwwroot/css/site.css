@@ -167,7 +167,7 @@ left-navbar {
 .profile-btn {
     display: flex;
     margin: 12px 0;
-    padding: 12px;
+    padding: 8px 7px;
     cursor: pointer;
     width: 240px;
     border-radius: 9999px;
@@ -360,7 +360,7 @@ left-navbar {
 }
 
 .tweet {
-    padding: 10px 13px 10px 13px;
+    padding: 10px 16px 10px 13px;
     display: flex;
     border-bottom: 1px solid var(--border-color);
     border-top: 1px solid var(--border-color);
@@ -411,15 +411,12 @@ left-navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 12px;
+    margin-top: 4px;
 }
 
     .tweet .right-column .bottom-row .buttons {
         display: flex;
     }
-
-
-
 
 
     .tweet .right-column .bottom-row .tweet-btn {
@@ -475,7 +472,7 @@ left-navbar {
         fill: rgb(29,161,242);
     }
 
-.tweet .bottom-row .buttons div {
+.tweet .bottom-row .buttons label {
     height: 2rem;
     width: 2rem;
     border-radius: 9999px;
@@ -487,7 +484,7 @@ left-navbar {
     cursor: pointer;
 }
 
-    .tweet .bottom-row .buttons div:hover {
+    .tweet .bottom-row .buttons label:hover {
         background-color: rgba(29,161,242,0.2);
     }
 

@@ -77,12 +77,14 @@
 
             reader.onload = function (e) {
                 imagemPreview.src = e.target.result;
+                imagemPreview.style.display = 'block'; // Exibe a imagem quando uma imagem é selecionada
             }
 
             reader.readAsDataURL(input.files[0]);
+        } else {
+            imagemPreview.style.display = 'none'; // Oculta a imagem se nenhum arquivo for selecionado ou se a seleção for removida
         }
     }
-
     function focusOutFunction(e, idLabel, idForm) {
         if (e.value.length > 0) {
             document.getElementById(idLabel).style.top = "30%";

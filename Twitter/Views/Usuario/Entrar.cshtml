@@ -1,0 +1,194 @@
+﻿@model Login
+@{
+    ViewData["Title"] = "Entrar no Twitter";
+    Layout = "_LayoutDeslogado";
+    string mensagem = TempData["MensagemErro"] as string;
+}
+
+<div class="modal">
+    <div class="modal-signup">
+        <form asp-action="Entrar" asp-controller="Usuario" class="form-signup">
+            <div class="steps">
+                <header>
+                    <a asp-action="Index" asp-controller="Usuario">
+                        <div id="close">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <g>
+                                    <path d="M10.59 12L4.54 5.96l1.42-1.42L12 10.59l6.04-6.05 1.42 1.42L13.41 12l6.05 6.04-1.42 1.42L12 13.41l-6.04 6.05-1.42-1.42L10.59 12z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </a>
+                    <div>
+                        <img src="~/img/twitter-logo-2-1.png" />
+                    </div>
+                </header>
+                <section>
+                    <div>
+                        <span>Entrar no Twitter</span>
+                        <button style="padding: .45rem .6rem; margin-bottom: 25px" class="google_btn"><i class="fab fa-google"></i>Entrar com Google</button>
+                        <button style="padding: .45rem .6rem"><i class="fab fa-apple"></i>Entrar com Apple</button>
+                        <div style="margin-top: 15px" class="separator">
+                            <div class="line"></div>
+                            <h5>ou</h5>
+                            <div class="line"></div>
+                        </div>
+                        <div id="tagForm" class="inputs">
+                            <input asp-for="Tag" id="tagForm" onfocus="focusInFunction(this, 'tag', 'tagForm')" onfocusOut="focusOutFunction(this, 'tag', 'tagForm')" />
+                            <label id="tag">E-mail ou nome de usuário</label>
+                            <span>@mensagem</span>
+                        </div>
+                        <div>
+                            <button class="next" style="padding:.45rem .6rem;">Avançar</button>
+                            <a style="padding:.45rem .6rem;" class="password">Esqueceu sua senha?</a>
+                        </div>
+
+                        <h3>Não tem uma conta? <a>Inscreva-se</a></h3>
+                    </div>
+                </section>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .next{
+        background-color: black;
+        color: white;
+    }
+    .next:hover {
+            background-color: rgba(0,0,0,0.95)
+    }
+    .form-signup .steps {
+        padding: 10px;
+    }
+
+        .form-signup .steps span {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .form-signup .steps header {
+            display: flex;
+            align-items: center;
+        }
+
+            .form-signup .steps header > div {
+                display: flex;
+                width: 100%;
+                margin-left: 40%;
+            }
+
+                .form-signup .steps header > div img {
+                    width: 36px;
+                    cursor: default;
+                }
+
+        .form-signup .steps section {
+            justify-content: center;
+        }
+
+            .form-signup .steps section > div {
+                width: 70%;
+            }
+
+            .form-signup .steps section > div > div {
+                margin-top: 10px;
+            }
+
+                    .form-signup .steps section > div .inputs {
+                        height: 58px;
+                        width: 100%;
+                        border: 1px solid rgba(56,68,77, 0.3);
+                        border-radius: 5px;
+                        margin-bottom: 35px;
+                        position: relative;
+                    }
+
+                        .form-signup .steps section > div .inputs input {
+                            font-size: 17px;
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                            padding-left: 4px;
+                            padding-bottom: 5px;
+                            width: 97%;
+                            bottom: 5px;
+                            left: 6px;
+                            border: none;
+                            position: absolute;
+                            height: 23px;
+                        }
+
+                            .form-signup .steps section > div .inputs input:focus {
+                                outline: 0;
+                            }
+
+                        .form-signup .steps section > div .inputs label {
+                            cursor: text;
+                            user-select: none;
+                            left: 10px;
+                            color: rgb(56,68,77, 0.8);
+                            font-size: 17px;
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                            transform: translateY(-50%);
+                            top: 50%;
+                            position: absolute;
+                        }
+
+                        .form-signup .steps section > div .inputs span {
+                            left: 10px;
+                            font-size: 13px;
+                            color: red;
+                            position: absolute;
+                            top: 105%;
+                        }
+
+                        .form-signup .steps section > div .inputs a {
+                            text-decoration: none;
+                            left: 10px;
+                            font-size: 12.5px;
+                            color: rgb(29,161,242);
+                            position: absolute;
+                            top: 105%;
+                        }
+
+                            .form-signup .steps section > div .inputs a:hover {
+                                text-decoration: underline;
+                           }
+
+                .form-signup .steps section > div > h3 {
+                    margin-top: 40px;
+                    font-weight: 400;
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                    color: rgb(83, 100, 113);
+                    font-size: 15px;
+                }
+
+                    .form-signup .steps section > div > h3 a {
+                        font-size: 14px;
+                        color: rgb(29,161,242);
+                        cursor: pointer;
+                    }
+
+</style>
+<script>
+    function focusOutFunction(e, idLabel, idForm) {
+        if (e.value.length > 0) {
+            document.getElementById(idLabel).style.top = "30%";
+            document.getElementById(idLabel).style.fontSize = "14px";
+        }
+        else {
+            document.getElementById(idLabel).style.top = "50%";
+            document.getElementById(idLabel).style.fontSize = "17px";
+        }
+        document.getElementById(idLabel).style.color = "rgb(56, 68, 77, 0.8)";
+        document.getElementById(idForm).style.border = "1px solid rgba(56,68,77, 0.3)";
+    }
+
+    function focusInFunction(e, idLabel, idForm) {
+        document.getElementById(idLabel).style.top = "30%";
+        document.getElementById(idLabel).style.fontSize = "14px";
+        document.getElementById(idLabel).style.color = "rgb(29,161,242)";
+        document.getElementById(idForm).style.border = "1px solid rgb(29,161,242)";
+    }
+
+</script>

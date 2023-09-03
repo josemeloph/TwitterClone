@@ -37,15 +37,13 @@ namespace Twitter.Controllers
         {
             try
             {
-                if(!ModelState.IsValid)
-                {
-                    return RedirectToAction(nameof(Index));
-                }
-                tweet.Usuario = new Usuario { Nome = "José", Tag = "@josemeloph" };
+                int userId = 34;
+                tweet.UsuarioId = userId;
                 _tweetRepositorio.Adicionar(tweet);
                 return RedirectToAction(nameof(Index));
+
             }
-            catch (Exception ex)
+            catch
             {
                 return RedirectToAction(nameof(Index));
             }

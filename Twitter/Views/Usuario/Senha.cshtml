@@ -1,0 +1,128 @@
+﻿@model Login
+@{
+    ViewData["Title"] = "Entrar no Twitter";
+    Layout = "_LayoutDeslogado";
+    string mensagem = TempData["MensagemErro"] as string;
+}
+
+<div class="modal">
+    <div class="modal-signup">
+        <form asp-action="Senha" asp-controller="Usuario" class="form-signup">
+            <div class="steps" id="profile-tag">
+                <header>
+                    <a asp-action="Index" asp-controller="Usuario">
+                        <div id="close">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <g>
+                                    <path d="M10.59 12L4.54 5.96l1.42-1.42L12 10.59l6.04-6.05 1.42 1.42L13.41 12l6.05 6.04-1.42 1.42L12 13.41l-6.04 6.05-1.42-1.42L10.59 12z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </a>
+                    <div>
+                        <img src="~/img/twitter-logo-2-1.png" />
+                    </div>
+                </header>
+                <section>
+                    <div>
+                        <span>Digite sua senha</span>
+                        <div>
+                            <div id="tagForm" class="inputs">
+                                <input asp-for="Tag" value="@Model.Tag" id="tagInput" readonly/>
+                                <label id="tag">Nome de usuário</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div id="passwordForm" class="inputs">
+                                <input asp-for="Senha" id="passwordInput" onfocus="focusInFunction(this, 'password', 'passwordForm')" onfocusOut="focusOutFunction(this, 'password', 'passwordForm')" />
+                                <label id="password">Senha</label>
+                                <a href="">Esqueceu sua senha?</a>
+                                <span style="margin-top: 20px">@mensagem</span>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="btn">
+                    <button class="button">Entrar</button>
+                    <h3>Não tem uma conta? <a>Inscreva-se</a></h3>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .btn {
+       display: block;
+    }
+    #tagInput{
+        cursor: default;
+        background: transparent;
+        color: rgb(56,68,77, 0.33);
+    }
+    #tagForm{
+        cursor: default;
+        border: none;
+        background: rgba(0, 0, 0, 0.05);
+    }
+    #tag{
+        cursor: default;
+        color: rgb(56,68,77, 0.38);
+        top: 30%;
+        font-size: 14px;
+    }
+
+    .form-signup .steps header {
+        display: flex;
+        align-items: center;
+    }
+
+        .form-signup .steps header > div {
+            display: flex;
+            width: 100%;
+            margin-left: 40%;
+        }
+
+            .form-signup .steps header > div img {
+                width: 36px;
+                cursor: default;
+            }
+
+    .form-signup .steps h3 {
+        margin-top: 30px;
+        font-weight: 400;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: rgb(83, 100, 113);
+        font-size: 15px;
+    }
+
+        .form-signup .steps h3 a {
+            font-size: 14px;
+            color: rgb(29,161,242);
+            cursor: pointer;
+        }
+
+
+
+</style>
+<script>
+    function focusOutFunction(e, idLabel, idForm) {
+        if (e.value.length > 0) {
+            document.getElementById(idLabel).style.top = "30%";
+            document.getElementById(idLabel).style.fontSize = "14px";
+        }
+        else {
+            document.getElementById(idLabel).style.top = "50%";
+            document.getElementById(idLabel).style.fontSize = "17px";
+        }
+        document.getElementById(idLabel).style.color = "rgb(56, 68, 77, 0.8)";
+        document.getElementById(idForm).style.border = "1px solid rgba(56,68,77, 0.3)";
+    }
+    function focusInFunction(e, idLabel, idForm) {
+        document.getElementById(idLabel).style.top = "30%";
+        document.getElementById(idLabel).style.fontSize = "14px";
+        document.getElementById(idLabel).style.color = "rgb(29,161,242)";
+        document.getElementById(idForm).style.border = "1px solid rgb(29,161,242)";
+    }
+</script>

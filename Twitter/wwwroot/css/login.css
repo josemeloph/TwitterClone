@@ -72,6 +72,7 @@ button {
     font-weight: 500;
     font-size: .9rem;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 .google_btn {
@@ -140,9 +141,17 @@ p {
 }
 
 .signin_btn {
+    border: 1px solid rgba(0, 0, 0, .2);
     padding: .6rem;
     margin-top: 1rem;
     color: #1D9BF0;
+    text-decoration: none;
+    text-align: center;
+    width: 300px;
+    border-radius: 100vw;
+    font-weight: 500;
+    font-size: .9rem;
+    cursor: pointer;
 }
 
 button:hover {
@@ -208,7 +217,7 @@ footer {
         align-items: center;
     }
 
-        .form-signup .steps header div {
+        .form-signup .steps header > a div {
             justify-content: center;
             align-items: center;
             display: flex;
@@ -219,11 +228,11 @@ footer {
             transition: 0.2s;
         }
 
-            .form-signup .steps header div svg {
+            .form-signup .steps header > a div svg {
                 width: 20px;
             }
 
-            .form-signup .steps header div:hover {
+            .form-signup .steps header > a div:hover {
                 background-color: rgba(200,200,200,0.6);
             }
 
@@ -397,4 +406,24 @@ footer {
         border-radius: 100vw;
         cursor: pointer;
         text-align: center;
+    }
+
+.password {
+    justify-content: center;
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, .2);
+    margin-top: 1rem;
+    color: black;
+    text-decoration: none;
+    padding: .6rem;
+    width: 300px;
+    border-radius: 100vw;
+    font-weight: 500;
+    font-size: .9rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+    .password:hover {
+        background-color: rgba(30, 156, 241, .15);
     }

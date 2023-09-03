@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -34,6 +33,11 @@ namespace Twitter.Models
         public string CodigoVerificacao { get; set; }
 
         public byte[] ImagemPerfil { get; set; }
+
+        public bool SenhaValida(string senha)
+        {
+            return Senha == senha;
+        }
 
     }
 }

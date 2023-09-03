@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Primitives;
 
 namespace Twitter.Controllers
 {
@@ -48,7 +49,7 @@ namespace Twitter.Controllers
 
                 usuarioViewModel.Usuario.DataNascimento = new DateTime(usuarioViewModel.Ano, usuarioViewModel.Mes, usuarioViewModel.Dia);
                 _usuarioRepositorio.Adicionar(usuarioViewModel.Usuario);
-                return RedirectToAction(nameof(Finalizar), new { usuarioId = usuarioViewModel.Usuario.Id});
+                return RedirectToAction(nameof(Finalizar), new { usuarioId = usuarioViewModel.Usuario.Id });
             }
             catch
             {
@@ -81,7 +82,7 @@ namespace Twitter.Controllers
                         user.ImagemPerfil = ms.ToArray();
                     }
                 }
-                if(tag != null)
+                if (tag != null)
                 {
                     if (_usuarioRepositorio.BuscarPorTag(tag) != null)
                     {
@@ -103,8 +104,60 @@ namespace Twitter.Controllers
                 var user = _usuarioRepositorio.BuscarPorId(usuarioId);
                 return View(usuarioId);
             }
+        }
 
+        public IActionResult Entrar()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult Entrar(Login login)
+        {
+            try
+            {
+                if (login.Tag != null)
+                {
+                    if (_usuarioRepositorio.BuscarPorTag(login.Tag) != null)
+                    {
+                        return RedirectToAction(nameof(Senha), new { tag = login.Tag });
+                    }
+                    TempData["MensagemErro"] = "Desculpe, mas não encontramos sua conta.";
+                    return View();
+                }
+                TempData["MensagemErro"] = "Desculpe, mas não encontramos sua conta.";
+                return View();
+            }
+            catch
+            {
+                TempData["MensagemErro"] = "Desculpe, mas não encontramos sua conta.";
+                return View();
+            }
+        }
+
+        public IActionResult Senha(string tag)
+        {
+            Login login = new Login { Tag = tag };
+            return View(login);
+        }
+
+        [HttpPost]
+        public IActionResult Senha(Login login)
+        {
+            try
+            {
+                var user = _usuarioRepositorio.BuscarPorTag(login.Tag);
+                if (user.SenhaValida(login.Senha))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                TempData["MensagemErro"] = "Senha inválida";
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

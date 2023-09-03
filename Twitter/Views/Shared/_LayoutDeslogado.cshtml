@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Twitter</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/login.css" />
     <link rel="icon" href="~/favicons/favicon-16x16.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -45,7 +45,7 @@
                 <a asp-action="Criar" asp-controller="Usuario" class="phone_btn" id="create-account">Criar conta</a>
             <p>Ao se inscrever, você concorda com os <a href="#">Termos de Serviço</a> e a <br /> <a href="#">Política de Privacidade</a>, incluindo o <a href="#">Uso de Cookies</a>.</p>
             <h4>Já tem uma conta?</h4>
-            <button class="signin_btn">Entrar</button>
+            <a asp-action="Entrar" asp-controller="Usuario" class="signin_btn">Entrar</a>
         </div>
     </div>
     <footer>

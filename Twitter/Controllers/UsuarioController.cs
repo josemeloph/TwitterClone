@@ -41,8 +41,7 @@ namespace Twitter.Controllers
         [HttpPost]
         public IActionResult Criar(UsuarioViewModel usuarioViewModel)
         {
-            try
-            {
+      
                 if (!ModelState.IsValid)
                 {
                     return View();
@@ -57,11 +56,8 @@ namespace Twitter.Controllers
                 _usuarioRepositorio.Adicionar(usuarioViewModel.Usuario);
                 _sessao.CriarSessaoUsuario(usuarioViewModel.Usuario);
                 return RedirectToAction(nameof(Finalizar));
-            }
-            catch
-            {
-                return View();
-            }
+            
+
         }
 
         public IActionResult Finalizar()

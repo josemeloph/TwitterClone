@@ -46,6 +46,21 @@ namespace Twitter.Repositorios
             return tweetDB;
         }
 
+        public void AdicionarCurtida(int id)
+        {
+            Tweet tweetDB = BuscarPorId(id);
+            tweetDB.NumCurtidas += 1;
+            _context.Update(tweetDB);
+            _context.SaveChanges();
+        }
+
+        public void RemoverCurtida(int id)
+        {
+            Tweet tweetDB = BuscarPorId(id);
+            tweetDB.NumCurtidas -= 1;
+            _context.SaveChanges();
+        }
+
         public bool Apagar(int id)
         {
             Tweet tweetDB = BuscarPorId(id);

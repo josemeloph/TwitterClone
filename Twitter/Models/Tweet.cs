@@ -12,7 +12,7 @@ namespace Twitter.Models
         public int QteComentarios { get; set; }
         public DateTime DataTweetado { get; set; }
         public DateTime? DataAtualizacao { get; set; }
-        public int Curtidas { get; set; }
+        public int NumCurtidas { get; set; }
         public int Retweets { get; set; }
         public string Conteudo { get; set; }
 

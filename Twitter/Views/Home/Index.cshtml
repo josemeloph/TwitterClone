@@ -10,10 +10,10 @@
     </header>
     <div class="tweet">
         <div class="left-column">
-            <img src="~/img/MyPhoto.jpg" class="profile-img" />
+            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Usuario.ImagemPerfil)" alt="profile" class="profile-img" />
         </div>
         <div class="right-column">
-            <form style="position: relative; " asp-controller ="Home" asp-action="Tweetar" id="tweetForm" class="top-row" method="post">
+            <form style="position: relative; " asp-controller="Home" asp-action="Tweetar" id="tweetForm" class="top-row" method="post">
                 <textarea asp-for="Tweet.Conteudo" id="tweetTxtArea" placeholder="O que está acontecendo?" rows="1" cols="50" oninput="autoExpand(this)" maxlength="280"></textarea>
                 <img style="display: none" class="imagem" id="imagem-preview" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png">
                 <div id="close" class="close-img" style="display: none;">
@@ -26,12 +26,12 @@
                 <div class="bottom-row">
                     <div class="buttons">
                         <label>
-                                <svg viewBox="0 0 24 24">
-                                    <g>
-                                        <path d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v9.086l3-3 3 3 5-5 3 3V5.5c0-.276-.224-.5-.5-.5h-13zM19 15.414l-3-3-5 5-3-3-3 3V18.5c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-3.086zM9.75 7C8.784 7 8 7.784 8 8.75s.784 1.75 1.75 1.75 1.75-.784 1.75-1.75S10.716 7 9.75 7z"></path>
-                                    </g>
-                                </svg>
-                            <input type="file" id="imagem" name="imagem" accept=".jpg, .jpeg, .png" onchange="previewImagem(this);" hidden/>
+                            <svg viewBox="0 0 24 24">
+                                <g>
+                                    <path d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v9.086l3-3 3 3 5-5 3 3V5.5c0-.276-.224-.5-.5-.5h-13zM19 15.414l-3-3-5 5-3-3-3 3V18.5c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-3.086zM9.75 7C8.784 7 8 7.784 8 8.75s.784 1.75 1.75 1.75 1.75-.784 1.75-1.75S10.716 7 9.75 7z"></path>
+                                </g>
+                            </svg>
+                            <input type="file" id="imagem" name="imagem" accept=".jpg, .jpeg, .png" onchange="previewImagem(this);" hidden />
                         </label>
                         <label>
                             <svg viewBox="0 0 24 24">
@@ -107,7 +107,6 @@
                                     <path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-8.054 4.46v-3.69h-.067c-4.49.1-8.183-3.51-8.183-8.01zm8.005-6c-3.317 0-6.005 2.69-6.005 6 0 3.37 2.77 6.08 6.138 6.01l.351-.01h1.761v2.3l5.087-2.81c1.951-1.08 3.163-3.13 3.163-5.36 0-3.39-2.744-6.13-6.129-6.13H9.756z"></path>
                                 </g>
                             </svg>
-
                         </div>
                         <span>@tweet.QteComentarios</span>
                     </div>
@@ -122,17 +121,37 @@
                         </div>
                         <span>@tweet.Retweets</span>
                     </div>
-                    <div class="curtidas">
-                        <div>
-                            <svg viewBox="0 0 24 24">
-                                <g>
-                                    <path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"></path>
-                                </g>
-                            </svg>
+                    <form asp-action="Curtir" asp-controller="Home" method="post" id="curtir">
+                        <input hidden name="tweetId" value="@tweet.Id">
+                        <button style="border: none;">
+                            <div>
+                                @if (Model.Curtidas.Any(x => x.TweetId == tweet.Id))
+                                {
+                                    <svg style="fill: rgb(224,36,94);" viewBox="0 0 24 24">
+                                        <g>
+                                            <path d="M20.884 13.19c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"></path>
+                                        </g>
+                                    </svg>
+                                } else
+                                {
+                                    <svg viewBox="0 0 24 24">
+                                        <g>
+                                            <path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.30-.504-.30c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.10 4.796-2.01 1.954.10 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"></path>
+                                        </g>
+                                    </svg>
+                                }
 
-                        </div>
-                        <span id="numCurtidas">@tweet.Curtidas</span>
-                    </div>
+                            </div>
+                        </button>
+                        @if (Model.Curtidas.Any(x => x.TweetId == tweet.Id))
+                        {
+                            <span style="color: rgb(224,36,94);">@tweet.NumCurtidas</span>
+                        }
+                        else
+                        {
+                            <span>@tweet.NumCurtidas</span>
+                        }
+                    </form>
                     <div>
                         <div style="margin-left: 10px;">
                             <svg viewBox="0 0 24 24">
@@ -155,7 +174,31 @@
 </aside>
 
 <style>
-    .close-img {
+    #curtir {
+        align-items: center;
+        display: flex;
+        width: auto;
+    }
+    #curtir > button {
+        background: transparent;
+    }
+
+        #curtir div {
+            display: flex;
+        }
+
+    
+        #curtir:hover div {
+            background-color: rgba(224,36,94, 0.2);
+            border-radius: 9999px;
+        }
+
+            #curtir:hover div svg,
+            #curtir:hover span {
+                color: rgb(224,36,94);
+                fill: currentColor;
+            }
+            .close-img {
         fill: white;
         backdrop-filter: blur(4px);
         background-color: rgb(15 20 25 / 81%);
@@ -171,17 +214,19 @@
         transition: 0.2s;
     }
 
-    .close-img svg {
+        .close-img svg {
             width: 18px;
-    }
-    .close-img:hover {
+        }
+
+        .close-img:hover {
             background-color: rgb(31 40 49 / 72%);
-    }
+        }
 
 
     .forFollow {
         border-bottom: 4px solid rgb(29,161,242);
     }
+
     .imagem {
         width: 100%;
         border-radius: 17px;
@@ -238,5 +283,4 @@
             botao.style.cursor = "pointer";
         }
     });
-
 </script>

@@ -12,12 +12,13 @@ namespace Twitter.Repositorios
     {
         List<Tweet> BuscarTodos();
 
-
         Tweet BuscarPorId(int id);
 
         Tweet Adicionar(Tweet tweet);
 
         Tweet Atualizar(Tweet tweet);
+        void AdicionarCurtida(int id);
+        void RemoverCurtida(int id);
 
         bool Apagar(int id);
         bool ApagarTodos();

@@ -40,10 +40,10 @@ namespace Twitter
             services.AddScoped<ITweetRepositorio, TweetRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<ISessao, Sessao>();
+            services.AddScoped<ICurtidaRepositorio, CurtidaRepositorio>();
 
             services.AddSession(o =>
             {
-                o.IdleTimeout = TimeSpan.FromMinutes(60);
                 o.Cookie.HttpOnly = true;
                 o.Cookie.IsEssential = true;
             });

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Twitter.Filters;
 using Twitter.Helper;
@@ -21,20 +22,24 @@ namespace Twitter.Controllers
         private readonly ITweetRepositorio _tweetRepositorio;
         private readonly IUsuarioRepositorio _usuarioRepositorio;
         private readonly ISessao _sessao;
+        private readonly ICurtidaRepositorio _curtidaRepositorio;
 
         public HomeController(ILogger<HomeController> logger, ITweetRepositorio tweetRepositorio, 
-            IUsuarioRepositorio usuarioRepositorio, ISessao sessao)
+            IUsuarioRepositorio usuarioRepositorio, ISessao sessao, ICurtidaRepositorio curtidaRepositorio)
         {
             _logger = logger;
             _tweetRepositorio = tweetRepositorio;
             _usuarioRepositorio = usuarioRepositorio;
             _sessao = sessao;
+            _curtidaRepositorio = curtidaRepositorio;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Tweet> tweets = _tweetRepositorio.BuscarTodos().OrderByDescending(x => x.DataTweetado);
-            var viewModel = new HomeViewModel { Tweets = tweets};
+            var tweets = _tweetRepositorio.BuscarTodos().OrderByDescending(x => x.DataTweetado);
+            var usuario = _sessao.BuscarSessaoUsuario();
+            var curtidas = _curtidaRepositorio.BuscarCurtidasDoUsuario(usuario.Id);
+            var viewModel = new HomeViewModel { Tweets = tweets, Usuario = usuario, Curtidas = curtidas};
             return View(viewModel);
         }
 
@@ -53,6 +58,25 @@ namespace Twitter.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
+        }
+
+        [HttpPost]
+        public IActionResult Curtir(int tweetId)
+        {
+            var user = _sessao.BuscarSessaoUsuario();
+            var curtida = _curtidaRepositorio.BuscarCurtida(user.Id, tweetId);
+
+            if (curtida == null)
+            {
+                _curtidaRepositorio.Adicionar(new Curtida { TweetId = tweetId, UsuarioId = user.Id });
+                _tweetRepositorio.AdicionarCurtida(tweetId);
+            } 
+            else
+            {
+                _curtidaRepositorio.Remover(user.Id, tweetId);
+                _tweetRepositorio.RemoverCurtida(tweetId);
+            }
+            return RedirectToAction("Index");
         }
 
 

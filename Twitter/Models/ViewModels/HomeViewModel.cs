@@ -6,5 +6,7 @@ namespace Twitter.Models.ViewModels
     {
         public IEnumerable<Tweet> Tweets { get; set; }
         public Tweet Tweet { get; set; }
+        public Usuario Usuario { get; set; }
+        public List<Curtida> Curtidas { get; set; }
     }
 }

@@ -13,5 +13,6 @@ namespace Twitter.Data
         public DbSet<Tweet> Tweets { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
+        public DbSet<Curtida> Curtidas { get; set; }
     }
 }

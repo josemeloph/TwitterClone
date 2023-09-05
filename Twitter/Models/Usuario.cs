@@ -24,6 +24,7 @@ namespace Twitter.Models
         [Required(ErrorMessage = "Insira uma senha.")]
         [MinLength(8, ErrorMessage = "Sua senha precisa ter pelo menos 8 caracteres. Insira uma mais longa.")]
         public string Senha { get; set; }
+        public List<Curtida> TweetsCurtidos { get; set; }
         public List<Tweet> Tweets { get; set; }
         [Required]
         [DataType(DataType.Date)]

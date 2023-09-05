@@ -15,6 +15,7 @@ namespace Twitter.Models
         public int NumCurtidas { get; set; }
         public int Retweets { get; set; }
         public string Conteudo { get; set; }
+        public byte[] Imagem { get; set; }
 
 
         public string TempoDecorrido()

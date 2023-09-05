@@ -13,9 +13,9 @@
             <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Usuario.ImagemPerfil)" alt="profile" class="profile-img" />
         </div>
         <div class="right-column">
-            <form style="position: relative; " asp-controller="Home" asp-action="Tweetar" id="tweetForm" class="top-row" method="post">
+            <form style="position: relative; " asp-controller="Home" asp-action="Tweetar" id="tweetForm" class="top-row" method="post" enctype="multipart/form-data">
                 <textarea asp-for="Tweet.Conteudo" id="tweetTxtArea" placeholder="O que está acontecendo?" rows="1" cols="50" oninput="autoExpand(this)" maxlength="280"></textarea>
-                <img style="display: none" class="imagem" id="imagem-preview" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png">
+                <img style="display: none; margin-bottom: 10px" class="imagem" id="imagem-preview" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_200x200.png">
                 <div id="close" class="close-img" style="display: none;">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <g>
@@ -31,7 +31,7 @@
                                     <path d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v9.086l3-3 3 3 5-5 3 3V5.5c0-.276-.224-.5-.5-.5h-13zM19 15.414l-3-3-5 5-3-3-3 3V18.5c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-3.086zM9.75 7C8.784 7 8 7.784 8 8.75s.784 1.75 1.75 1.75 1.75-.784 1.75-1.75S10.716 7 9.75 7z"></path>
                                 </g>
                             </svg>
-                            <input type="file" id="imagem" name="imagem" accept=".jpg, .jpeg, .png" onchange="previewImagem(this);" hidden />
+                            <input type="file" id="imagem" name="imagem" accept=".jpg, .jpeg, .png" onchange="previewImagem(this); " hidden/>
                         </label>
                         <label>
                             <svg viewBox="0 0 24 24">
@@ -97,7 +97,10 @@
                         </div>
                     </header>
                     <p style="max-width: 500px; word-wrap: break-word;">@tweet.Conteudo</p>
-
+                    @if(tweet.Imagem != null)
+                    {
+                        <img style="width: 99%;margin-top: 15px;" class="imagem" id="imagem-preview" src="data:image/jpeg;base64,@Convert.ToBase64String(tweet.Imagem)">
+                    }
                 </article>
                 <div class="bottom-row">
                     <div>

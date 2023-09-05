@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -44,12 +46,20 @@ namespace Twitter.Controllers
         }
 
         [HttpPost]
-        public IActionResult Tweetar(Tweet tweet)
+        public IActionResult Tweetar(Tweet tweet, IFormFile imagem)
         {
             try
             {
                 var user = _sessao.BuscarSessaoUsuario();
                 tweet.UsuarioId = user.Id;
+                if (imagem != null && imagem.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        imagem.CopyTo(ms);
+                        tweet.Imagem = ms.ToArray();
+                    }
+                }
                 _tweetRepositorio.Adicionar(tweet);
                 return RedirectToAction(nameof(Index));
 

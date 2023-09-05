@@ -31,7 +31,10 @@ namespace Twitter.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var user = _usuarioRepositorio.BuscarPorId(48);
+            _sessao.CriarSessaoUsuario(user);
+            return RedirectToAction("Index", "Home");
+            //return View();
         }
 
         public IActionResult Criar()
@@ -41,22 +44,22 @@ namespace Twitter.Controllers
         [HttpPost]
         public IActionResult Criar(UsuarioViewModel usuarioViewModel)
         {
-      
-                if (!ModelState.IsValid)
-                {
-                    return View();
-                }
-                if (_usuarioRepositorio.BuscarPorEmail(usuarioViewModel.Usuario.Email) != null)
-                {
-                    TempData["MensagemErro"] = "Este e-mail já está sendo usado.";
-                    return View();
-                }
 
-                usuarioViewModel.Usuario.DataNascimento = new DateTime(usuarioViewModel.Ano, usuarioViewModel.Mes, usuarioViewModel.Dia);
-                _usuarioRepositorio.Adicionar(usuarioViewModel.Usuario);
-                _sessao.CriarSessaoUsuario(usuarioViewModel.Usuario);
-                return RedirectToAction(nameof(Finalizar));
-            
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            if (_usuarioRepositorio.BuscarPorEmail(usuarioViewModel.Usuario.Email) != null)
+            {
+                TempData["MensagemErro"] = "Este e-mail já está sendo usado.";
+                return View();
+            }
+
+            usuarioViewModel.Usuario.DataNascimento = new DateTime(usuarioViewModel.Ano, usuarioViewModel.Mes, usuarioViewModel.Dia);
+            _usuarioRepositorio.Adicionar(usuarioViewModel.Usuario);
+            _sessao.CriarSessaoUsuario(usuarioViewModel.Usuario);
+            return RedirectToAction(nameof(Finalizar));
+
 
         }
 
@@ -171,5 +174,11 @@ namespace Twitter.Controllers
             _sessao.RemoverSessaoUsuario();
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult TrocarDeConta()
+        {
+            return View();
+        }
     }
 }
+

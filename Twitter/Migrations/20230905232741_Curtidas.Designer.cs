@@ -9,7 +9,7 @@ using Twitter.Data;
 namespace Twitter.Migrations
 {
     [DbContext(typeof(TwitterContext))]
-    [Migration("20230904165321_Curtidas")]
+    [Migration("20230905232741_Curtidas")]
     partial class Curtidas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,8 +66,6 @@ namespace Twitter.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TweetId");
-
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Curtidas");
@@ -87,6 +85,9 @@ namespace Twitter.Migrations
 
                     b.Property<DateTime>("DataTweetado")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<byte[]>("Imagem")
+                        .HasColumnType("longblob");
 
                     b.Property<int>("NumCurtidas")
                         .HasColumnType("int");
@@ -168,12 +169,6 @@ namespace Twitter.Migrations
 
             modelBuilder.Entity("Twitter.Models.Curtida", b =>
                 {
-                    b.HasOne("Twitter.Models.Tweet", null)
-                        .WithMany("Curtidas")
-                        .HasForeignKey("TweetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Twitter.Models.Usuario", null)
                         .WithMany("TweetsCurtidos")
                         .HasForeignKey("UsuarioId")
@@ -195,8 +190,6 @@ namespace Twitter.Migrations
             modelBuilder.Entity("Twitter.Models.Tweet", b =>
                 {
                     b.Navigation("Comentarios");
-
-                    b.Navigation("Curtidas");
                 });
 
             modelBuilder.Entity("Twitter.Models.Usuario", b =>

@@ -366,7 +366,8 @@ left-navbar {
     border-top: 1px solid var(--border-color);
 }
 
-.post:hover {
+.post:hover,
+.comment:hover{
     cursor: pointer;
     background-color: rgba(240,240,240,0.08);
 }
@@ -427,7 +428,8 @@ left-navbar {
         margin: 0;
     }
 
-.post {
+.post,
+.comment {
     padding: 15px;
     display: flex;
     border-bottom: 1px solid var(--border-color);
@@ -494,25 +496,30 @@ left-navbar {
     margin-left: 4px;
 }
 
-.post .bottom-row {
+.post .bottom-row,
+.comment .bottom-row {
     max-width: 425px;
     margin-top: 12px;
     justify-content: space-between;
 }
 
     .post .bottom-row,
-    .post .bottom-row > div {
+    .post .bottom-row > div,
+    .comment .bottom-row,
+    .comment .bottom-row > div {
         display: flex;
         align-items: center;
         color: rgb(136,153,166);
         cursor: pointer;
     }
 
-        .post .bottom-row > div {
+        .post .bottom-row > div,
+        .comment .bottom-row > div {
             margin: -8px;
         }
 
-            .post .bottom-row > div > div {
+            .post .bottom-row > div > div,
+            .comment .bottom-row > div > div {
                 border-radius: 9999px;
                 display: flex;
                 align-items: center;
@@ -520,57 +527,69 @@ left-navbar {
                 transition: 0.2s ease;
             }
 
-            .post .bottom-row > div > span {
+            .post .bottom-row > div > span,
+            .comment .bottom-row > div > span {
                 transition: 0.2s ease;
             }
 
-            .post .bottom-row > div:hover > div {
+            .post .bottom-row > div:hover > div,
+            .comment .bottom-row > div:hover > div {
                 background-color: rgba(29,161,242,0.2);
             }
 
             .bottom-row > div:hover > div svg,
-            .post .bottom-row > div:hover > span {
+            .post .bottom-row > div:hover > span,
+            .comment .bottom-row > div:hover > span {
                 color: var(--main-color);
                 fill: currentColor;
             }
 
-            .post .bottom-row > div:nth-child(2):hover > div {
+            .post .bottom-row > div:nth-child(2):hover > div,
+            .comment .bottom-row > div:nth-child(2):hover > div {
                 background-color: rgba(23,191, 99,0.2);
             }
 
             .post .bottom-row > div:nth-child(2):hover > span,
+            .comment .bottom-row > div:nth-child(2):hover > span,
             .bottom-row > div:nth-child(2):hover > div svg {
                 color: rgb(23,191,99);
                 fill: currentColor;
             }
 
-            .post .bottom-row > div:nth-child(3):hover > div {
+            .post .bottom-row > div:nth-child(3):hover > div,
+            .comment .bottom-row > div:nth-child(3):hover > div {
                 background-color: rgba(224,36,94, 0.2);
             }
 
             .post .bottom-row > div:nth-child(3):hover > span,
+            .comment .bottom-row > div:nth-child(3):hover > span,
             .bottom-row > div:nth-child(3):hover > div svg {
                 color: rgb(224,36,94);
                 fill: currentColor;
             }
 
-        .post .bottom-row span {
+        .post .bottom-row span,
+        .comment .bottom-row span {
             font-size: 13px;
         }
 
         .post .bottom-row span,
+        .comment .bottom-row svg,
+        .comment .bottom-row span,
         .post .bottom-row svg {
             fill: rgb(136,153,166);
             font-family: inherit;
         }
 
-        .post .bottom-row svg {
+        .post .bottom-row svg,
+        .comment .bottom-row svg {
             margin: 8px;
             width: 1.25em;
             height: 1.25em;
         }
 
-        .post .bottom-row span {
+        .post .bottom-row span,
+        .comment .bottom-row span {
             padding: 0 12px;
             line-height: 20px;
         }

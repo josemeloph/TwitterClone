@@ -21,14 +21,9 @@ namespace Twitter.Repositorios
             return curtida;
         }
 
-        public int NumCurtidas(int tweetId)
+        public bool RemoverCurtidaComentario(int userId, int comentarioId)
         {
-            return _context.Curtidas.Count(c => c.TweetId == tweetId);
-        }
-
-        public bool Remover(int userId, int tweetId)
-        {
-            var curtida = BuscarCurtida(userId, tweetId);
+            var curtida = BuscarCurtidaComentario(userId, comentarioId);
             if (curtida != null)
             {
                 _context.Curtidas.Remove(curtida);
@@ -38,9 +33,26 @@ namespace Twitter.Repositorios
             return false;
         }
 
-        public Curtida BuscarCurtida(int userId, int tweetId)
+        public bool RemoverCurtidaTweet(int userId, int tweetId)
+        {
+            var curtida = BuscarCurtidaTweet(userId, tweetId);
+            if (curtida != null)
+            {
+                _context.Curtidas.Remove(curtida);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public Curtida BuscarCurtidaTweet(int userId, int tweetId)
         {
             return _context.Curtidas.FirstOrDefault(c => c.UsuarioId == userId && c.TweetId == tweetId);
+        }
+
+        public Curtida BuscarCurtidaComentario(int userId, int comentarioId)
+        {
+            return _context.Curtidas.FirstOrDefault(c => c.UsuarioId == userId && c.ComentarioId == comentarioId);
         }
 
         public List<Curtida> BuscarCurtidasDoUsuario(int userId)

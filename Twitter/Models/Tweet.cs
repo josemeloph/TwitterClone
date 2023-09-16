@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Twitter.Models
 {
@@ -8,15 +9,25 @@ namespace Twitter.Models
         public int Id { get; set; }
         public Usuario Usuario { get; set; }
         public int UsuarioId { get; set; }
-        public List<Comentario> Comentarios { get; set; }
-        public int QteComentarios { get; set; }
         public DateTime DataTweetado { get; set; }
         public DateTime? DataAtualizacao { get; set; }
-        public int NumCurtidas { get; set; }
+        public int Curtidas { get; set; }
+        public int Comentarios { get; set; }
+        public int Salvos { get; set; }
         public int Retweets { get; set; }
         public string Conteudo { get; set; }
         public byte[] Imagem { get; set; }
 
+
+        public string HoraTweet()
+        {
+            CultureInfo cultureInfo = new CultureInfo("en-US");
+            return DataTweetado.ToString("h:mm tt", cultureInfo);
+        }
+        public string DataTweet()
+        {
+            return DataTweetado.Day.ToString() + " de " + DataTweetado.ToString("MMM") + " de " + DataTweetado.Year.ToString();
+        }
 
         public string TempoDecorrido()
         {

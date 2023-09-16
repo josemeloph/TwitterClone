@@ -9,8 +9,8 @@ using Twitter.Data;
 namespace Twitter.Migrations
 {
     [DbContext(typeof(TwitterContext))]
-    [Migration("20230905232741_Curtidas")]
-    partial class Curtidas
+    [Migration("20230913194632_UserImage")]
+    partial class UserImage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,11 +25,17 @@ namespace Twitter.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("Comentarios")
+                        .HasColumnType("int");
+
                     b.Property<string>("Conteudo")
                         .HasColumnType("longtext");
 
                     b.Property<int>("Curtidas")
                         .HasColumnType("int");
+
+                    b.Property<byte[]>("Imagem")
+                        .HasColumnType("longblob");
 
                     b.Property<DateTime>("Momento")
                         .HasColumnType("datetime(6)");
@@ -37,15 +43,13 @@ namespace Twitter.Migrations
                     b.Property<int>("Retweets")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TweetId")
+                    b.Property<int>("TweetId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UsuarioId")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TweetId");
 
                     b.HasIndex("UsuarioId");
 
@@ -77,8 +81,14 @@ namespace Twitter.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("Comentarios")
+                        .HasColumnType("int");
+
                     b.Property<string>("Conteudo")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Curtidas")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime(6)");
@@ -89,13 +99,10 @@ namespace Twitter.Migrations
                     b.Property<byte[]>("Imagem")
                         .HasColumnType("longblob");
 
-                    b.Property<int>("NumCurtidas")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QteComentarios")
-                        .HasColumnType("int");
-
                     b.Property<int>("Retweets")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Salvos")
                         .HasColumnType("int");
 
                     b.Property<int>("UsuarioId")
@@ -156,13 +163,11 @@ namespace Twitter.Migrations
 
             modelBuilder.Entity("Twitter.Models.Comentario", b =>
                 {
-                    b.HasOne("Twitter.Models.Tweet", null)
-                        .WithMany("Comentarios")
-                        .HasForeignKey("TweetId");
-
                     b.HasOne("Twitter.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Usuario");
                 });
@@ -185,11 +190,6 @@ namespace Twitter.Migrations
                         .IsRequired();
 
                     b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("Twitter.Models.Tweet", b =>
-                {
-                    b.Navigation("Comentarios");
                 });
 
             modelBuilder.Entity("Twitter.Models.Usuario", b =>

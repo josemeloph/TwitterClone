@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Twitter.Data;
@@ -41,6 +42,7 @@ namespace Twitter
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<ISessao, Sessao>();
             services.AddScoped<ICurtidaRepositorio, CurtidaRepositorio>();
+            services.AddScoped<IComentarioRepositorio, ComentarioRepositorio>();
 
             services.AddSession(o =>
             {

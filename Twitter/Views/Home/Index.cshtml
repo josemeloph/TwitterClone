@@ -1,4 +1,4 @@
-﻿@model Twitter.Models.ViewModels.HomeViewModel
+﻿@model HomeViewModel
 <section class="content">
     <header class="content-header">
         <span>Página Inicial</span>
@@ -31,7 +31,7 @@
                                     <path d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v9.086l3-3 3 3 5-5 3 3V5.5c0-.276-.224-.5-.5-.5h-13zM19 15.414l-3-3-5 5-3-3-3 3V18.5c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-3.086zM9.75 7C8.784 7 8 7.784 8 8.75s.784 1.75 1.75 1.75 1.75-.784 1.75-1.75S10.716 7 9.75 7z"></path>
                                 </g>
                             </svg>
-                            <input type="file" id="imagem" name="imagem" accept=".jpg, .jpeg, .png" onchange="previewImagem(this); " hidden/>
+                            <input type="file" id="imagem" name="imagem" accept=".jpg, .jpeg, .png" onchange="previewImagem(this); " hidden />
                         </label>
                         <label>
                             <svg viewBox="0 0 24 24">
@@ -71,7 +71,7 @@
 
     @foreach (Tweet tweet in Model.Tweets)
     {
-        <div class="post">
+        <a href="@Url.Action("Index", "Post", new { tweetId = tweet.Id})" class="post" style="position: relative;" id="p-@tweet.Id" >
             <div class="left-column">
                 <img src="data:image/jpeg;base64,@Convert.ToBase64String(tweet.Usuario.ImagemPerfil)" alt="profile" class="profile-img" />
             </div>
@@ -87,7 +87,7 @@
                             <span id="time" class="time">@tweet.TempoDecorrido()</span>
                         </div>
                         <div>
-                            <svg viewBox="0 0 24 24" class="details">
+                            <svg viewBox="0 0 24 24" class="details" data-div-id="@tweet.Id" onclick="openModal(this)">
                                 <g>
                                     <circle cx="5" cy="12" r="2"></circle>
                                     <circle cx="12" cy="12" r="2"></circle>
@@ -97,7 +97,7 @@
                         </div>
                     </header>
                     <p style="max-width: 500px; word-wrap: break-word;">@tweet.Conteudo</p>
-                    @if(tweet.Imagem != null)
+                    @if (tweet.Imagem != null)
                     {
                         <img style="width: 99%;margin-top: 15px;" class="imagem" id="imagem-preview" src="data:image/jpeg;base64,@Convert.ToBase64String(tweet.Imagem)">
                     }
@@ -111,7 +111,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span>@tweet.QteComentarios</span>
+                        <span>@tweet.Comentarios</span>
                     </div>
                     <div>
                         <div>
@@ -135,7 +135,8 @@
                                             <path d="M20.884 13.19c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"></path>
                                         </g>
                                     </svg>
-                                } else
+                                }
+                                else
                                 {
                                     <svg viewBox="0 0 24 24">
                                         <g>
@@ -148,11 +149,11 @@
                         </button>
                         @if (Model.Curtidas.Any(x => x.TweetId == tweet.Id))
                         {
-                            <span style="color: rgb(224,36,94);">@tweet.NumCurtidas</span>
+                            <span style="color: rgb(224,36,94);">@tweet.Curtidas</span>
                         }
                         else
                         {
-                            <span>@tweet.NumCurtidas</span>
+                            <span>@tweet.Curtidas</span>
                         }
                     </form>
                     <div>
@@ -165,32 +166,145 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-
-
+                <div class="modal" id="m-@tweet.Id" style="display: none;">
+                    <div class="modal-content">
+                        <div class="modal-line" style="border-top-right-radius: 5px; border-top-left-radius: 5px;">
+                            <div>
+                                <svg viewBox="0 0 24 24" class="" onclick="">
+                                    <g>
+                                        <path d="M9.5 7c.828 0 1.5 1.119 1.5 2.5S10.328 12 9.5 12 8 10.881 8 9.5 8.672 7 9.5 7zm5 0c.828 0 1.5 1.119 1.5 2.5s-.672 2.5-1.5 2.5S13 10.881 13 9.5 13.672 7 14.5 7zM12 22.25C6.348 22.25 1.75 17.652 1.75 12S6.348 1.75 12 1.75 22.25 6.348 22.25 12 17.652 22.25 12 22.25zm0-18.5c-4.549 0-8.25 3.701-8.25 8.25s3.701 8.25 8.25 8.25 8.25-3.701 8.25-8.25S16.549 3.75 12 3.75zM8.947 17.322l-1.896-.638C7.101 16.534 8.322 13 12 13s4.898 3.533 4.949 3.684l-1.897.633c-.031-.09-.828-2.316-3.051-2.316s-3.021 2.227-3.053 2.322z"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <span>Esse tweet não me interessa</span>
+                        </div>
+                        <div class="modal-line">
+                            <div>
+                                <svg viewBox="0 0 24 24" class="" onclick="">
+                                    <g>
+                                        <path d="M10 4c-1.105 0-2 .9-2 2s.895 2 2 2 2-.9 2-2-.895-2-2-2zM6 6c0-2.21 1.791-4 4-4s4 1.79 4 4-1.791 4-4 4-4-1.79-4-4zm13 4v3h2v-3h3V8h-3V5h-2v3h-3v2h3zM3.651 19h12.698c-.337-1.8-1.023-3.21-1.945-4.19C13.318 13.65 11.838 13 10 13s-3.317.65-4.404 1.81c-.922.98-1.608 2.39-1.945 4.19zm.486-5.56C5.627 11.85 7.648 11 10 11s4.373.85 5.863 2.44c1.477 1.58 2.366 3.8 2.632 6.46l.11 1.1H1.395l.11-1.1c.266-2.66 1.155-4.88 2.632-6.46z"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <span>Seguir josemeloph</span>
+                        </div>
+                        <div class="modal-line">
+                            <div>
+                                <svg viewBox="0 0 24 24" class="" onclick="">
+                                    <g>
+                                        <path d="M5.5 4c-.28 0-.5.22-.5.5v15c0 .28.22.5.5.5H12v2H5.5C4.12 22 3 20.88 3 19.5v-15C3 3.12 4.12 2 5.5 2h13C19.88 2 21 3.12 21 4.5V13h-2V4.5c0-.28-.22-.5-.5-.5h-13zM16 10H8V8h8v2zm-8 2h8v2H8v-2zm10 7v-3h2v3h3v2h-3v3h-2v-3h-3v-2h3z"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <span>Adicionar/remover josemeloph das listas</span>
+                        </div>
+                        <div class="modal-line">
+                            <div>
+                                <svg viewBox="0 0 24 24" class="" onclick="">
+                                    <g>
+                                        <path d="M18 6.59V1.2L8.71 7H5.5C4.12 7 3 8.12 3 9.5v5C3 15.88 4.12 17 5.5 17h2.09l-2.3 2.29 1.42 1.42 15.5-15.5-1.42-1.42L18 6.59zm-8 8V8.55l6-3.75v3.79l-6 6zM5 9.5c0-.28.22-.5.5-.5H8v6H5.5c-.28 0-.5-.22-.5-.5v-5zm6.5 9.24l1.45-1.45L16 19.2V14l2 .02v8.78l-6.5-4.06z"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <span>Silenciar josemeloph</span>
+                        </div>
+                        <div class="modal-line">
+                            <div>
+                                <svg viewBox="0 0 24 24" class="" onclick="">
+                                    <g>
+                                        <path d="M12 3.75c-4.55 0-8.25 3.69-8.25 8.25 0 1.92.66 3.68 1.75 5.08L17.09 5.5C15.68 4.4 13.92 3.75 12 3.75zm6.5 3.17L6.92 18.5c1.4 1.1 3.16 1.75 5.08 1.75 4.56 0 8.25-3.69 8.25-8.25 0-1.92-.65-3.68-1.75-5.08zM1.75 12C1.75 6.34 6.34 1.75 12 1.75S22.25 6.34 22.25 12 17.66 22.25 12 22.25 1.75 17.66 1.75 12z"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <span>Bloquear josemeloph</span>
+                        </div>
+                        <div class="modal-line">
+                            <div>
+                                <svg viewBox="0 0 24 24" class="" onclick="">
+                                    <g>
+                                        <path d="M8.75 21V3h2v18h-2zM18 21V8.5h2V21h-2zM4 21l.004-10h2L6 21H4zm9.248 0v-7h2v7h-2z"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <span>Exibir engajamentos com o tweet</span>
+                        </div>
+                        <div class="modal-line" style="border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;">
+                            <div>
+                                <svg viewBox="0 0 24 24" class="" onclick="">
+                                    <g>
+                                        <path d="M3 2h18.61l-3.5 7 3.5 7H5v6H3V2zm2 12h13.38l-2.5-5 2.5-5H5v10z"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                            <span>Denunciar tweet</span>
+                        </div>
+                    </div>
+                </div>
+            
+            <div class="bg" onclick="closeModal(this)" data-bg-id="@tweet.Id" id="bg-@tweet.Id" style="display: none; position: fixed; top:0; bottom: 0; right: 0; left: 0; z-index: 1;"></div>
+        </a>
     }
+    <div style="height:200px; width: 100%;"></div>
 </section>
 <aside class="right-side">
     @Html.Partial("_RightSidePartial")
 </aside>
 
 <style>
+    .post:hover {
+        background: none;
+    }
+    .modal {
+        z-index: 2;
+        right: 13px;
+        position: absolute;
+    }
+    .modal-content {
+        border-radius: 10px;
+        background: rgba(21,32,43,1.00);
+        box-shadow: rgba(136, 153, 166, 0.2) 0px 0px 15px;
+    }
+    .modal-line {
+        display: flex;
+        padding: 5px 16px 5px 7px;
+        align-items: center;
+        transition: 0.2s;
+    }
+    .modal-line:hover {
+            background: rgba(255,255,255,0.03);
+    }
+    .modal-line > div {
+        display: flex;
+        fill: white;
+        color: white;
+    }
+
+    .modal-line span{
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+    }
+    .modal-line > div svg {
+            margin: 8px;
+            width: 1.25em;
+            height: 1.25em;
+        }
     #curtir {
         align-items: center;
         display: flex;
         width: auto;
     }
-    #curtir > button {
-        background: transparent;
-    }
+
+        #curtir > button {
+            background: transparent;
+        }
 
         #curtir div {
             display: flex;
         }
 
-    
+
         #curtir:hover div {
             background-color: rgba(224,36,94, 0.2);
             border-radius: 9999px;
@@ -201,7 +315,8 @@
                 color: rgb(224,36,94);
                 fill: currentColor;
             }
-            .close-img {
+
+    .close-img {
         fill: white;
         backdrop-filter: blur(4px);
         background-color: rgb(15 20 25 / 81%);
@@ -237,6 +352,38 @@
 </style>
 
 <script>
+    const bgElements = document.getElementsByClassName('bg');
+
+    Array.from(bgElements).forEach(function (element) {
+        element.addEventListener('click', function (event) {
+            event.preventDefault();
+        });
+    });
+
+
+    const detailsElements = document.getElementsByClassName('details');
+
+    Array.from(detailsElements).forEach(function (element) {
+        element.addEventListener('click', function (event) {
+            event.preventDefault();
+        });
+    });
+    function openModal(div) {
+        const divId = div.getAttribute('data-div-id');
+        const modal = document.getElementById(`m-${divId}`);
+        const bg = document.getElementById(`bg-${divId}`)
+        bg.style.display = "flex";
+        modal.style.display = "flex";
+    }
+
+    function closeModal(div) {
+        const divId = div.getAttribute('data-bg-id');
+        const modal = document.getElementById(`m-${divId}`);
+        const bg = document.getElementById(`bg-${divId}`)
+        bg.style.display = "none";
+        modal.style.display = "none";
+    }
+
     document.getElementById('close').addEventListener('click', function () {
         document.getElementById('imagem-preview').style.display = "none";
         document.getElementById('close').style.display = "none";

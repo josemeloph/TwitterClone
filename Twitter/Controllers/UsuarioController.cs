@@ -31,10 +31,7 @@ namespace Twitter.Controllers
 
         public IActionResult Index()
         {
-            var user = _usuarioRepositorio.BuscarPorId(48);
-            _sessao.CriarSessaoUsuario(user);
-            return RedirectToAction("Index", "Home");
-            //return View();
+            return View();
         }
 
         public IActionResult Criar()

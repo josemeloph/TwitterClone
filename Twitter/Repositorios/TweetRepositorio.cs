@@ -49,17 +49,31 @@ namespace Twitter.Repositorios
         public void AdicionarCurtida(int id)
         {
             Tweet tweetDB = BuscarPorId(id);
-            tweetDB.NumCurtidas += 1;
-            _context.Update(tweetDB);
+            tweetDB.Curtidas += 1;
             _context.SaveChanges();
         }
 
         public void RemoverCurtida(int id)
         {
             Tweet tweetDB = BuscarPorId(id);
-            tweetDB.NumCurtidas -= 1;
+            tweetDB.Curtidas -= 1;
             _context.SaveChanges();
         }
+
+        public void AdicionarComentario(int id)
+        {
+            Tweet tweetDB = BuscarPorId(id);
+            tweetDB.Comentarios += 1;
+            _context.SaveChanges();
+        }
+
+        public void RemoverComentario(int id)
+        {
+            Tweet tweetDB = BuscarPorId(id);
+            tweetDB.Comentarios -= 1;
+            _context.SaveChanges();
+        }
+
 
         public bool Apagar(int id)
         {

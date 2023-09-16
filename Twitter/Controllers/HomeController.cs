@@ -74,7 +74,7 @@ namespace Twitter.Controllers
         public IActionResult Curtir(int tweetId)
         {
             var user = _sessao.BuscarSessaoUsuario();
-            var curtida = _curtidaRepositorio.BuscarCurtida(user.Id, tweetId);
+            var curtida = _curtidaRepositorio.BuscarCurtidaTweet(user.Id, tweetId);
 
             if (curtida == null)
             {
@@ -83,10 +83,11 @@ namespace Twitter.Controllers
             } 
             else
             {
-                _curtidaRepositorio.Remover(user.Id, tweetId);
+                _curtidaRepositorio.RemoverCurtidaTweet(user.Id, tweetId);
                 _tweetRepositorio.RemoverCurtida(tweetId);
             }
-            return RedirectToAction("Index");
+            string refererUrl = Request.Headers["Referer"].ToString();
+            return Redirect(refererUrl);
         }
 
 

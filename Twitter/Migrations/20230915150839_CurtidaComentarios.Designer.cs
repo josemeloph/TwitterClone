@@ -9,8 +9,8 @@ using Twitter.Data;
 namespace Twitter.Migrations
 {
     [DbContext(typeof(TwitterContext))]
-    [Migration("20230831230244_UserImage")]
-    partial class UserImage
+    [Migration("20230915150839_CurtidaComentarios")]
+    partial class CurtidaComentarios
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,11 +25,17 @@ namespace Twitter.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("Comentarios")
+                        .HasColumnType("int");
+
                     b.Property<string>("Conteudo")
                         .HasColumnType("longtext");
 
                     b.Property<int>("Curtidas")
                         .HasColumnType("int");
+
+                    b.Property<byte[]>("Imagem")
+                        .HasColumnType("longblob");
 
                     b.Property<DateTime>("Momento")
                         .HasColumnType("datetime(6)");
@@ -37,25 +43,48 @@ namespace Twitter.Migrations
                     b.Property<int>("Retweets")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TweetId")
+                    b.Property<int>("TweetId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UsuarioId")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TweetId");
 
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Comentarios");
                 });
 
+            modelBuilder.Entity("Twitter.Models.Curtida", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ComentarioId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TweetId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Curtidas");
+                });
+
             modelBuilder.Entity("Twitter.Models.Tweet", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Comentarios")
                         .HasColumnType("int");
 
                     b.Property<string>("Conteudo")
@@ -70,10 +99,13 @@ namespace Twitter.Migrations
                     b.Property<DateTime>("DataTweetado")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("QteComentarios")
-                        .HasColumnType("int");
+                    b.Property<byte[]>("Imagem")
+                        .HasColumnType("longblob");
 
                     b.Property<int>("Retweets")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Salvos")
                         .HasColumnType("int");
 
                     b.Property<int>("UsuarioId")
@@ -134,15 +166,22 @@ namespace Twitter.Migrations
 
             modelBuilder.Entity("Twitter.Models.Comentario", b =>
                 {
-                    b.HasOne("Twitter.Models.Tweet", null)
-                        .WithMany("Comentarios")
-                        .HasForeignKey("TweetId");
-
                     b.HasOne("Twitter.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Twitter.Models.Curtida", b =>
+                {
+                    b.HasOne("Twitter.Models.Usuario", null)
+                        .WithMany("TweetsCurtidos")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Twitter.Models.Tweet", b =>
@@ -156,14 +195,11 @@ namespace Twitter.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("Twitter.Models.Tweet", b =>
-                {
-                    b.Navigation("Comentarios");
-                });
-
             modelBuilder.Entity("Twitter.Models.Usuario", b =>
                 {
                     b.Navigation("Tweets");
+
+                    b.Navigation("TweetsCurtidos");
                 });
 #pragma warning restore 612, 618
         }

@@ -19,7 +19,8 @@ namespace Twitter.Repositorios
         Tweet Atualizar(Tweet tweet);
         void AdicionarCurtida(int id);
         void RemoverCurtida(int id);
-
+        void AdicionarComentario(int id);
+        void RemoverComentario(int id);
         bool Apagar(int id);
         bool ApagarTodos();
         bool ApagarTodosDoUsuario(int userId);
